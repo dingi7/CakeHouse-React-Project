@@ -84,11 +84,20 @@ ol ol {
   margin-top: 5px;
   margin-bottom: 0;
 }
+NavLink.active{
+  color: #daa556;
+}
 ul li, ol li {
   margin-bottom: 5px;
   outline: 0;
 }
-ul li.active a{
+ul li a.active{
+  color: #daa556;
+}
+a.active{
+  color: #daa556;
+}
+.menu-active{
   color: #daa556;
 }
 ul li:last-child,
@@ -1095,6 +1104,7 @@ button {
 .page-title {
   font-size: 4.5em;
   margin-top: 2em;
+  text-align: center;
 }
 @media screen and (max-width: 768px) {
   .page-title {
@@ -1848,7 +1858,7 @@ footer#footer {
     width: 45%;
   }
   .product-style img.product-item {
-      /*height: 550px;*/
+      /* height: 550px; */
       object-fit: contain;
       margin: 0 auto;
   }
