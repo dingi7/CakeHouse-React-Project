@@ -26,7 +26,7 @@ export const InfoSection = () => {
                                 </div>
                                 {/*banner-content*/}
                                 <img
-                                    src={require('../../main_banner.jpg')}
+                                    src="https://media.discordapp.net/attachments/1051448329399185459/1088957550818512956/1.jpg?width=460&height=671"
                                     alt="banner"
                                     className="banner-image"
                                 />

@@ -34,6 +34,9 @@ export const Header = () => {
                                         <li className="menu-item">
                                         <NavLink data-effect="Contact" className={({isActive}) => isActive ? 'active' : 'menu-item nav-link' } to="/contact">Contact</NavLink>
                                         </li>
+                                        {/* <li className="menu-item">
+                                        <NavLink class="cart for-buy" to="/contact"><i class="icon icon-clipboard"></i><span>Cart:(0 лв)</span></NavLink>
+                                        </li> */}
                                     </ul>
                                     <div className="hamburger">
                                         <span className="bar" />
