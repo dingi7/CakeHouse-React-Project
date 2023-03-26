@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Cake } from './Cake';
+import { AnimationOnScroll } from 'react-animation-on-scroll';
 
 export const Featured = () => {
     const [cakes, setCakes] = useState([]);
@@ -22,12 +23,14 @@ export const Featured = () => {
                         </div>
                         <div className="product-list" data-aos="">
                             <div className="row">
-                                {cakes.slice(0, 4).map((c) => (
-                                    <div className="col-md-3" key={c._id}>
-                                        {' '}
-                                        <Cake {...c}></Cake>{' '}
-                                    </div>
-                                ))}
+                                <AnimationOnScroll animateIn="animate__backInUp">
+                                    {cakes.slice(0, 4).map((c) => (
+                                        <div className="col-md-3" key={c._id}>
+                                            {' '}
+                                            <Cake {...c}></Cake>{' '}
+                                        </div>
+                                    ))}
+                                </AnimationOnScroll>
                             </div>
                         </div>
                     </div>

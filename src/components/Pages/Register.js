@@ -1,7 +1,11 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import { AuthContext } from '../AuthContext';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const RegisterPage = () => {
+    const { setAccessToken } = useContext(AuthContext);
     const [userData, setUserData] = useState({
         email: '',
         name: '',
@@ -12,7 +16,7 @@ export const RegisterPage = () => {
     const onFormChangeHandler = (e) => {
         setUserData((state) => ({ ...state, [e.target.name]: e.target.value }));
     };
-
+    const navigate = useNavigate()
     const onFormSubmit = async (e) => {
         e.preventDefault();
         const resp = await fetch('http://localhost:3030/users/register', {
@@ -27,13 +31,23 @@ export const RegisterPage = () => {
                 password: userData.password,
             }),
         });
-        if (resp.status === 400) {
-            // throw error
-            return console.log('Error');
-        }
         const data = await resp.json();
-        console.log(data);
-        // const token = data.accessToken;
+        if (!resp.ok === 400) {
+            toast.error(data.message, {
+                position: 'top-right',
+                autoClose: 2000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: 'light',
+            });
+        }
+        const token = data.accessToken;
+        localStorage.setItem('access_token', token);
+        setAccessToken(token);
+        navigate('/', { replace: true });
     };
 
     return (
@@ -81,8 +95,22 @@ export const RegisterPage = () => {
                         Register
                     </button>
                 </form>
-                <p>Already have an account? <Link to='/login'>Login</Link></p>
+                <p>
+                    Already have an account? <Link to="/login">Login</Link>
+                </p>
             </div>
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar
+                newestOnTop
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="colored"
+            />
         </>
     );
 };

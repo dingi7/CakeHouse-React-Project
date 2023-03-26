@@ -1,7 +1,11 @@
-import { useState } from 'react';
-import { Link, redirect } from 'react-router-dom';
+import { useState, useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import { AuthContext } from '../AuthContext';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const LoginPage = () => {
+    const { setAccessToken } = useContext(AuthContext);
     const [userData, setUserData] = useState({
         email: '',
         password: '',
@@ -10,9 +14,10 @@ export const LoginPage = () => {
     const onFormChangeHandler = (e) => {
         setUserData((state) => ({ ...state, [e.target.name]: e.target.value }));
     };
+    const navigate = useNavigate()
 
     const onFormSubmit = async (e) => {
-        e.preventDefault()
+        e.preventDefault();
         const resp = await fetch('http://localhost:3030/users/login', {
             method: 'POST',
             headers: {
@@ -20,16 +25,26 @@ export const LoginPage = () => {
             },
             body: JSON.stringify({
                 email: userData.email,
-                password: userData.password
+                password: userData.password,
             }),
         });
-        if(resp.status === 400){
-            // throw error
-            return console.log('Error');
+        const data = await resp.json();
+        if (!resp.ok === 400) {
+            toast.error(data.message, {
+                position: 'top-right',
+                autoClose: 2000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: 'light',
+            });
         }
-        // const data = await resp.json();
         // const token = data.accessToken;
-        return redirect('/')
+        localStorage.setItem('access_info', JSON.stringify(data));
+        setAccessToken(data);
+        navigate('/', { replace: true });
     };
 
     return (
@@ -53,12 +68,30 @@ export const LoginPage = () => {
                         value={userData.password}
                         onChange={onFormChangeHandler}
                     />
-                    <button type="submit" className="btn" onClick={onFormSubmit}>
+                    <button
+                        type="submit"
+                        className="btn"
+                        onClick={onFormSubmit}
+                    >
                         Login
                     </button>
                 </form>
-                <p>Don't have an account? <Link to='/register'>Register</Link></p>
+                <p>
+                    Don't have an account? <Link to="/register">Register</Link>
+                </p>
             </div>
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar
+                newestOnTop
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="colored"
+            />
         </>
     );
 };
