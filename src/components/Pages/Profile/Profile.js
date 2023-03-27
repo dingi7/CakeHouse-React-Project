@@ -1,12 +1,9 @@
 import { useContext } from 'react';
-import { AuthContext } from '../../AuthContext';
+import { AuthContext } from '../../contexts/AuthContext';
 import styles from './profile.module.css';
 
 export const ProfilePage = () => {
-    const { accessToken } = useContext(AuthContext);
-    if (!accessToken) {
-        return <div>Loading...</div>;
-    }
+    const { accessData } = useContext(AuthContext);
     return (
         <>
             <h1>Profile</h1>
@@ -17,7 +14,7 @@ export const ProfilePage = () => {
                     <input
                         type="text"
                         id="name"
-                        defaultValue={accessToken.fullName}
+                        defaultValue={accessData.fullName}
                         readOnly
                     />
                 </div>
@@ -26,7 +23,7 @@ export const ProfilePage = () => {
                     <input
                         type="tel"
                         id="phone"
-                        defaultValue={accessToken.phoneNumber}
+                        defaultValue={accessData.phoneNumber}
                         readOnly
                     />
                 </div>
@@ -35,7 +32,7 @@ export const ProfilePage = () => {
                     <input
                         type="email"
                         id="email"
-                        defaultValue={accessToken.email}
+                        defaultValue={accessData.email}
                         readOnly
                     />
                 </div>
@@ -44,7 +41,7 @@ export const ProfilePage = () => {
                     <input
                         type="text"
                         id="accessRights"
-                        defaultValue={accessToken.autorization}
+                        defaultValue={accessData.autorization}
                         readOnly
                     />
                 </div>

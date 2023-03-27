@@ -1,13 +1,9 @@
+import { Link } from 'react-router-dom';
 import { Product } from '../Partials/CartProduct';
+import { getCartFromLocalStorage } from '../utils/shoppingCartUtils';
 
 export const ShoppingCartPage = () => {
-    const getCartFromLocalStorage = () => {
-        const cartData = localStorage.getItem('cart');
-        return cartData ? JSON.parse(cartData) : [];
-    };
-    const cart = getCartFromLocalStorage();
-    let totalPrice = 0;
-    cart.map((c) => (totalPrice += c.item.price));
+    const {cart, totalPrice} = getCartFromLocalStorage();
     return (
         <div className="containerCart">
             <h1>Shopping Cart</h1>
@@ -43,7 +39,7 @@ export const ShoppingCartPage = () => {
                             </tr>
                         </tfoot>
                     </table>
-                    <button className="btn">Checkout</button>
+                    <Link to="/checkout"><button className="btn">Checkout</button></Link>
                 </>
             )}
         </div>

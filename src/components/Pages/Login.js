@@ -1,11 +1,11 @@
 import { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
-import { AuthContext } from '../AuthContext';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { AuthContext } from '../contexts/AuthContext';
 
 export const LoginPage = () => {
-    const { setAccessToken } = useContext(AuthContext);
+    const { setAccessData } = useContext(AuthContext);
     const [userData, setUserData] = useState({
         email: '',
         password: '',
@@ -14,7 +14,7 @@ export const LoginPage = () => {
     const onFormChangeHandler = (e) => {
         setUserData((state) => ({ ...state, [e.target.name]: e.target.value }));
     };
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     const onFormSubmit = async (e) => {
         e.preventDefault();
@@ -29,7 +29,7 @@ export const LoginPage = () => {
             }),
         });
         const data = await resp.json();
-        if (!resp.ok === 400) {
+        if (!resp.ok) {
             toast.error(data.message, {
                 position: 'top-right',
                 autoClose: 2000,
@@ -40,11 +40,10 @@ export const LoginPage = () => {
                 progress: undefined,
                 theme: 'light',
             });
+        } else {
+            setAccessData(data);
+            navigate('/profile', { replace: true });
         }
-        // const token = data.accessToken;
-        localStorage.setItem('access_info', JSON.stringify(data));
-        setAccessToken(data);
-        navigate('/', { replace: true });
     };
 
     return (
@@ -80,18 +79,6 @@ export const LoginPage = () => {
                     Don't have an account? <Link to="/register">Register</Link>
                 </p>
             </div>
-            <ToastContainer
-                position="top-right"
-                autoClose={5000}
-                hideProgressBar
-                newestOnTop
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-                theme="colored"
-            />
         </>
     );
 };

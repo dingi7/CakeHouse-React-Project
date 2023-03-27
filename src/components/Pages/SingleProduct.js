@@ -1,11 +1,11 @@
 import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { AuthContext } from '../AuthContext';
-import { ToastContainer, toast } from 'react-toastify';
+import { AuthContext } from '../contexts/AuthContext';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export const SingleProductPage = () => {
-    const { accessToken } = useContext(AuthContext);
+    const { accessData } = useContext(AuthContext);
     const { id } = useParams();
     const [cake, setCake] = useState({});
     useEffect(() => {
@@ -22,7 +22,7 @@ export const SingleProductPage = () => {
     };
     const [cart, setCart] = useState(getCartFromLocalStorage());
     const addToCart = () => {
-        if (!accessToken) {
+        if (!accessData) {
             toast.error(
                 'Please log in to be able to add this item to your shopping cart!',
                 {
@@ -30,7 +30,7 @@ export const SingleProductPage = () => {
                     autoClose: 2000,
                     hideProgressBar: true,
                     closeOnClick: true,
-                    pauseOnHover: true,
+                    pauseOnHover: false,
                     draggable: true,
                     progress: undefined,
                     theme: 'light',
@@ -47,7 +47,20 @@ export const SingleProductPage = () => {
         const updatedCart = [...cart, { item }];
         setCart(updatedCart);
         saveCartToLocalStorage(updatedCart);
-        // [2].item.name
+        toast.success(
+            'Item successfuly added to your shopping cart!',
+            {
+                position: 'top-right',
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined,
+                theme: 'light',
+            }
+        );
+        
     };
     return (
         <>
@@ -55,7 +68,6 @@ export const SingleProductPage = () => {
                 <div className="container">
                     <div className="row">
                         <div className="col-md-6">
-                            {/* <img src={cake.img} alt="banner" /> */}
                             <img src={cake.img} alt="banner" />
                         </div>
                         <div className="col-md-6 pl-5">
@@ -79,18 +91,6 @@ export const SingleProductPage = () => {
                     </div>
                 </div>
             </section>
-            <ToastContainer
-                position="top-right"
-                autoClose={5000}
-                hideProgressBar
-                newestOnTop
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-                theme="colored"
-            />
         </>
     );
 };

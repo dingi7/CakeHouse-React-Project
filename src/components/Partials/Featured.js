@@ -38,11 +38,9 @@ export const Featured = () => {
                 <div className="row">
                     <div className="col-md-12">
                         <div className="btn-wrap align-right">
-                            <Link to="/shop">
-                                <a href="/shop" className="btn-accent-arrow">
-                                    View all products{' '}
-                                    <i className="icon icon-ns-arrow-right" />
-                                </a>
+                            <Link to="/shop" className="btn-accent-arrow">
+                                View all products{' '}
+                                <i className="icon icon-ns-arrow-right" />
                             </Link>
                         </div>
                     </div>

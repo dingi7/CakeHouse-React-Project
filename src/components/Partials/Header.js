@@ -1,9 +1,9 @@
 import { Link, NavLink } from 'react-router-dom';
 import { useContext } from 'react';
-import { AuthContext } from '../AuthContext';
+import { AuthContext } from '../contexts/AuthContext';
 
 export const Header = () => {
-    const { accessToken } = useContext(AuthContext);
+    const { isAuth } = useContext(AuthContext);
     return (
         <div id="header-wrap">
             <header id="header">
@@ -12,12 +12,10 @@ export const Header = () => {
                         <div className="col-md-2">
                             <div className="main-logo">
                                 <Link to="/">
-                                    <a href="index.html">
-                                        <img
-                                            src={require('../../CakeHouse.png')}
-                                            alt="logo"
-                                        />
-                                    </a>
+                                    <img
+                                        src='https://www.dropbox.com/s/bv8xoojwdxw0u75/CakeHouse.png?raw=1'
+                                        alt="logo"
+                                    />
                                 </Link>
                             </div>
                         </div>
@@ -46,7 +44,7 @@ export const Header = () => {
                                                         ? 'active'
                                                         : 'menu-item nav-link'
                                                 }
-                                                to="/profile"
+                                                to="/about"
                                             >
                                                 About
                                             </NavLink>
@@ -77,30 +75,83 @@ export const Header = () => {
                                                 Contact
                                             </NavLink>
                                         </li>
-                                        {accessToken ? (
-                                            ''
+                                        {isAuth ? (
+                                            <>
+                                                <li className="menu-item">
+                                                    <NavLink
+                                                        data-effect="Profile"
+                                                        className={({
+                                                            isActive,
+                                                        }) =>
+                                                            isActive
+                                                                ? 'active'
+                                                                : 'menu-item nav-link'
+                                                        }
+                                                        to="/profile"
+                                                    >
+                                                        Profile
+                                                    </NavLink>
+                                                </li>
+                                                <li className="menu-item">
+                                                    <NavLink
+                                                        data-effect="Logout"
+                                                        className={({
+                                                            isActive,
+                                                        }) =>
+                                                            isActive
+                                                                ? 'active'
+                                                                : 'menu-item nav-link'
+                                                        }
+                                                        to="/logout"
+                                                    >
+                                                        Logout
+                                                    </NavLink>
+                                                </li>
+                                            </>
                                         ) : (
-                                            <li className="menu-item">
-                                                <NavLink
-                                                    data-effect="Login"
-                                                    className={({ isActive }) =>
-                                                        isActive
-                                                            ? 'active'
-                                                            : 'menu-item nav-link'
-                                                    }
-                                                    to="/login"
-                                                >
-                                                    LogIn
-                                                </NavLink>
-                                            </li>
+                                            <>
+                                                <li className="menu-item">
+                                                    <NavLink
+                                                        data-effect="Login"
+                                                        className={({
+                                                            isActive,
+                                                        }) =>
+                                                            isActive
+                                                                ? 'active'
+                                                                : 'menu-item nav-link'
+                                                        }
+                                                        to="/login"
+                                                    >
+                                                        LogIn
+                                                    </NavLink>
+                                                </li>
+                                                <li className="menu-item">
+                                                    <NavLink
+                                                        data-effect="Register"
+                                                        className={({
+                                                            isActive,
+                                                        }) =>
+                                                            isActive
+                                                                ? 'active'
+                                                                : 'menu-item nav-link'
+                                                        }
+                                                        to="/register"
+                                                    >
+                                                        Register
+                                                    </NavLink>
+                                                </li>
+                                            </>
                                         )}
-
-                                        {/* <li className="menu-item">
-                                        <NavLink data-effect="Register" className={({isActive}) => isActive ? 'active' : 'menu-item nav-link' } to="/registe">register</NavLink>
-                                        </li> */}
-                                        {/* <li className="menu-item">
-                                        <NavLink class="cart for-buy" to="/contact"><i class="icon icon-clipboard"></i><span>Cart:(0 лв)</span></NavLink>
-                                        </li> */}
+                                        <li className="menu-item">
+                                            <NavLink
+                                                to="/cart"
+                                            >
+                                                <i
+                                                    className="fa fa-shopping-cart fa-lg"
+                                                    aria-hidden="true"
+                                                ></i>
+                                            </NavLink>
+                                        </li>
                                     </ul>
                                     <div className="hamburger">
                                         <span className="bar" />
