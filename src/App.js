@@ -39,7 +39,6 @@ function App() {
     // setTimeout(() => {
     //     setIsReady(true);
     // }, 2000);
-
     return (
         <BrowserRouter>
             <ToastContainer

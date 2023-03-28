@@ -4,6 +4,7 @@ import { AuthContext } from '../contexts/AuthContext';
 
 export const Header = () => {
     const { isAuth } = useContext(AuthContext);
+
     return (
         <div id="header-wrap">
             <header id="header">
@@ -13,7 +14,7 @@ export const Header = () => {
                             <div className="main-logo">
                                 <Link to="/">
                                     <img
-                                        src='https://www.dropbox.com/s/bv8xoojwdxw0u75/CakeHouse.png?raw=1'
+                                        src="https://www.dropbox.com/s/bv8xoojwdxw0u75/CakeHouse.png?raw=1"
                                         alt="logo"
                                     />
                                 </Link>
@@ -143,9 +144,7 @@ export const Header = () => {
                                             </>
                                         )}
                                         <li className="menu-item">
-                                            <NavLink
-                                                to="/cart"
-                                            >
+                                            <NavLink to="/cart">
                                                 <i
                                                     className="fa fa-shopping-cart fa-lg"
                                                     aria-hidden="true"

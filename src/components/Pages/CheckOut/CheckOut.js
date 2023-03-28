@@ -1,18 +1,20 @@
 import { useContext, useState } from 'react';
 import styles from './checkOut.module.css';
 import { Product } from '../../Partials/CartProduct';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import {
     clearShoppingCart,
     getCartFromLocalStorage,
 } from '../../utils/shoppingCartUtils';
 import { AuthContext } from '../../contexts/AuthContext';
 import { toast } from 'react-toastify';
+import { Thanks } from '../../Partials/Thanks/Thanks';
 
 export const CheckOutPage = () => {
     const { accessData } = useContext(AuthContext);
     const { cart, totalPrice } = getCartFromLocalStorage();
-    const navigate = useNavigate();
+    const [isOrderPlaced, setIsOrderPlaced] = useState(false)
+    const [orderId, setOrderId] = useState('')
 
     const [orderData, setOrderData] = useState({
         deliveryMethod: 'delivery',
@@ -61,10 +63,11 @@ export const CheckOutPage = () => {
             });
             return;
         }
-        navigate('/');
         clearShoppingCart();
+        setIsOrderPlaced(true);
+        setOrderId(data._id);
     };
-    if (totalPrice > 0) {
+    if (totalPrice > 0 && !isOrderPlaced) {
         return (
             <>
                 <h1>Checkout</h1>
@@ -156,7 +159,12 @@ export const CheckOutPage = () => {
                 </div>
             </>
         );
-    } else {
+    } else if(isOrderPlaced){
+        return(
+            <Thanks orderId={orderId}/>
+        )
+    }
+    else {
         return (
             <>
                 <h1>Checkout</h1>
