@@ -1,0 +1,95 @@
+.admin-page-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.user-list {
+    flex-basis: 30%;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-left: 20px;
+}
+
+.user-list h2 {
+    margin-bottom: 10px;
+}
+
+.user-list table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.user-list th,
+.order-list th,
+.order-list td,
+.user-list td {
+    text-align: center;
+    padding: 5px;
+    border: 1px solid #ddd;
+    line-height: 1;
+}
+
+.order-list {
+    flex-basis: 40%;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+.order-list h2 {
+    margin-bottom: 10px;
+}
+
+.order-list table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.add-product-form {
+    flex-basis: 30%;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-right: 20px;
+}
+
+.add-product-form h2 {
+    margin-bottom: 10px;
+}
+
+.add-product-form form {
+    display: flex;
+    flex-direction: column;
+}
+
+.add-product-form div {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.add-product-form div label {
+    margin-bottom: 5px;
+}
+
+.add-product-form div input,
+.add-product-form div textarea {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.add-product-form div textarea {
+    height: 100px;
+    resize: none;
+}
+
+.add-product-form button[type='submit'] {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.admin-page-container button:hover {
+    background-color: #b39781;
+}

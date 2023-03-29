@@ -12,7 +12,7 @@ export const Header = () => {
                     <div className="row">
                         <div className="col-md-2">
                             <div className="main-logo">
-                                <Link to="/">
+                                <Link to="/admin">
                                     <img
                                         src="https://www.dropbox.com/s/bv8xoojwdxw0u75/CakeHouse.png?raw=1"
                                         alt="logo"

@@ -12,6 +12,7 @@ import { ToastContainer } from 'react-toastify';
 import { PrivateRoute } from './components/Pages/Routes/PrivateRoute';
 import { PublicRoute } from './components/Pages/Routes/PublicRoute';
 import { LockedRoute } from './components/Pages/Routes/LockedRoute';
+import { AdminPage } from './components/Pages/AdminPage/AdminPage';
 
 function App() {
     // const [isReady, setIsReady] = useState(true);
@@ -56,11 +57,12 @@ function App() {
             <Header></Header>
             <Routes>
                 <Route path="*" element={<h1 className="page-title">404</h1>} />
+                <Route path="/admin" element={<AdminPage/>} />
                 <Route path="/" element={<HomePage />} />
                 <Route path="/shop" element={<ShopPage />} />
                 <Route path="/shop/:id" element={<SingleProductPage />} />
                 <Route
-                    path="/admin"
+                    path="/adminn"
                     element={<LockedRoute component={HomePage} />}
                 ></Route>
                 <Route
