@@ -13,6 +13,7 @@ import { PrivateRoute } from './components/Pages/Routes/PrivateRoute';
 import { PublicRoute } from './components/Pages/Routes/PublicRoute';
 import { LockedRoute } from './components/Pages/Routes/LockedRoute';
 import { AdminPage } from './components/Pages/AdminPage/AdminPage';
+import { Logout } from './components/Pages/Logout';
 
 function App() {
     // const [isReady, setIsReady] = useState(true);
@@ -57,13 +58,12 @@ function App() {
             <Header></Header>
             <Routes>
                 <Route path="*" element={<h1 className="page-title">404</h1>} />
-                <Route path="/admin" element={<AdminPage/>} />
                 <Route path="/" element={<HomePage />} />
                 <Route path="/shop" element={<ShopPage />} />
                 <Route path="/shop/:id" element={<SingleProductPage />} />
                 <Route
-                    path="/adminn"
-                    element={<LockedRoute component={HomePage} />}
+                    path="/admin"
+                    element={<LockedRoute component={AdminPage} />}
                 ></Route>
                 <Route
                     path="/login"
@@ -72,6 +72,10 @@ function App() {
                 <Route
                     path="/register"
                     element={<PublicRoute component={RegisterPage} />}
+                ></Route>
+                <Route
+                    path="/logout"
+                    element={<PrivateRoute component={Logout} />}
                 ></Route>
                 <Route
                     path="/profile"

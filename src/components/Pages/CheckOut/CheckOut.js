@@ -17,7 +17,7 @@ export const CheckOutPage = () => {
     const [orderId, setOrderId] = useState('')
 
     const [orderData, setOrderData] = useState({
-        deliveryMethod: 'delivery',
+        deliveryMethod: 'pickup',
         paymentMethod: 'card',
         address: '',
     });
@@ -98,15 +98,6 @@ export const CheckOutPage = () => {
                         <h2 className={styles.checkoutHeader}>Delivery</h2>
                         <input
                             type="radio"
-                            id="delivery"
-                            name="deliveryMethod"
-                            value="delivery"
-                            checked={orderData.deliveryMethod === 'delivery'}
-                            onChange={onFormChangeHandler}
-                        />
-                        <label htmlFor="delivery">Delivery</label>
-                        <input
-                            type="radio"
                             id="pickup"
                             name="deliveryMethod"
                             value="pickup"
@@ -114,6 +105,15 @@ export const CheckOutPage = () => {
                             onChange={onFormChangeHandler}
                         />
                         <label htmlFor="pickup">Pickup</label>
+                        <input
+                            type="radio"
+                            id="delivery"
+                            name="deliveryMethod"
+                            value="delivery"
+                            checked={orderData.deliveryMethod === 'delivery'}
+                            onChange={onFormChangeHandler}
+                        />
+                        <label htmlFor="delivery">Delivery</label>
                         {orderData.deliveryMethod === 'delivery' && (
                             <>
                                 <label htmlFor="address">Address:</label>

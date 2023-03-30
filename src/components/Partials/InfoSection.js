@@ -26,7 +26,7 @@ export const InfoSection = () => {
                                 </div>
                                 {/*banner-content*/}
                                 <img
-                                    src="https://www.dropbox.com/s/q9dunegfc2jem3t/1.jpg?raw=1"
+                                    src={require('../../banner.jpg')}
                                     alt="banner"
                                     className="banner-image"
                                 />

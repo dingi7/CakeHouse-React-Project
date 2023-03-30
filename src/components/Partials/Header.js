@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import { AuthContext } from '../contexts/AuthContext';
 
 export const Header = () => {
-    const { isAuth } = useContext(AuthContext);
+    const { isAuth, isAdmin } = useContext(AuthContext);
 
     return (
         <div id="header-wrap">
@@ -12,9 +12,9 @@ export const Header = () => {
                     <div className="row">
                         <div className="col-md-2">
                             <div className="main-logo">
-                                <Link to="/admin">
+                                <Link to="/">
                                     <img
-                                        src="https://www.dropbox.com/s/bv8xoojwdxw0u75/CakeHouse.png?raw=1"
+                                        src={require('../../logo.png')}
                                         alt="logo"
                                     />
                                 </Link>
@@ -93,6 +93,23 @@ export const Header = () => {
                                                         Profile
                                                     </NavLink>
                                                 </li>
+                                                {isAdmin && (
+                                                    <li className="menu-item">
+                                                        <NavLink
+                                                            data-effect="Register"
+                                                            className={({
+                                                                isActive,
+                                                            }) =>
+                                                                isActive
+                                                                    ? 'active'
+                                                                    : 'menu-item nav-link'
+                                                            }
+                                                            to="/admin"
+                                                        >
+                                                            Admin
+                                                        </NavLink>
+                                                    </li>
+                                                )}
                                                 <li className="menu-item">
                                                     <NavLink
                                                         data-effect="Logout"
@@ -143,6 +160,7 @@ export const Header = () => {
                                                 </li>
                                             </>
                                         )}
+
                                         <li className="menu-item">
                                             <NavLink to="/cart">
                                                 <i
