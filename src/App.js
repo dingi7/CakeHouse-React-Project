@@ -16,31 +16,6 @@ import { AdminPage } from './components/Pages/AdminPage/AdminPage';
 import { Logout } from './components/Pages/Logout';
 
 function App() {
-    // const [isReady, setIsReady] = useState(true);
-    // const debouncedSetAccessToken = debounce(setAccessToken, 5000);
-    // useEffect(() => {
-    //     console.log('Ran');
-    //     const storedAccessToken = localStorage.getItem('access_info');
-    //     if (storedAccessToken) {
-    //         try {
-    //             const parsedAccessToken = JSON.parse(storedAccessToken);
-    //             if (accessToken === parsedAccessToken) {
-    //                 return;
-    //             }
-    //             debouncedSetAccessToken(parsedAccessToken);
-    //         } catch (error) {
-    //             console.error('Failed to parse access token:', error);
-    //             localStorage.setItem('access_info', {});
-    //             <Navigate to="/login"></Navigate>;
-    //         }
-    //     }
-    //     setIsReady(true);
-    //     // eslint-disable-next-line react-hooks/exhaustive-deps
-    // }, []);
-
-    // setTimeout(() => {
-    //     setIsReady(true);
-    // }, 2000);
     return (
         <BrowserRouter>
             <ToastContainer

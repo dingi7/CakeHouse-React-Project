@@ -10,7 +10,12 @@ export const Order = ({
 }) => {
     return (
         <tr>
-            <td>{owner.name}</td>
+            <td>
+                {owner.name}
+                <br></br>
+                <br></br>
+                {owner.phoneNumber}
+            </td>
             <td>{total}lv</td>
             <td>
                 {products.map((p) => (

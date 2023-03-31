@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const api = require('../services/sweets');
-const { isAuth, isOwner } = require('../middlewares/guards');
+const { isAuth, isAuthorized } = require('../middlewares/guards');
 const mapErrors = require('../utils/mapper');
 const preload = require('../middlewares/preload');
 
@@ -35,7 +35,7 @@ router.get('/:id', preload(), (req, res) => {
     res.json(item);
 });
 
-router.put('/:id', preload(), isOwner(), async (req, res) => {
+router.put('/:id', preload(), isAuthorized(), async (req, res) => {
     const itemId = req.params.id;
     const item = {
         make: req.body.make,
@@ -57,7 +57,7 @@ router.put('/:id', preload(), isOwner(), async (req, res) => {
     }
 });
 
-router.delete('/:id', preload(), isOwner(), async (req, res) => {
+router.delete('/:id', preload(), isAuthorized(), async (req, res) => {
     try {
         const itemId = req.params.id;
         await api.deleteById(itemId);

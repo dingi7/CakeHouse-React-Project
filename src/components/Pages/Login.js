@@ -42,6 +42,7 @@ export const LoginPage = () => {
             });
         } else {
             setAccessData(data);
+            localStorage.setItem('access_info', JSON.stringify(data));
             navigate('/profile', { replace: true });
         }
     };

@@ -45,6 +45,7 @@ export const RegisterPage = () => {
             });
         } else {
             setAccessData(data);
+            localStorage.setItem('access_info', JSON.stringify(data));
             navigate('/profile', { replace: true });
         }
         // localStorage.setItem('access_token', token);

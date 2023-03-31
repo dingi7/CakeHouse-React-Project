@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const cors = require('./middlewares/cors');
 const catalogController = require('./controllers/catalog');
 const usersController = require('./controllers/users');
+const ordersController = require('./controllers/orders')
 const auth = require('./middlewares/auth');
 
 
@@ -27,6 +28,7 @@ async function start() {
     app.use(cors());
     app.use(auth());
     app.use('/data/catalog', catalogController);
+    app.use('/orders', ordersController);
     app.use('/users', usersController);
 
     app.get('/', (req, res) => res.json({ message: 'REST service operational'}));

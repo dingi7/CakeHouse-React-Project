@@ -221,6 +221,7 @@ export const AdminPage = () => {
                         {orders.map((o) => (
                             <Order
                                 {...o}
+                                owner={o.owner ? o.owner : {name: o.name, phoneNumber: o.phoneNumber}}
                                 key={o._id}
                                 onOrderFulfill={onOrderFulfill}
                             ></Order>

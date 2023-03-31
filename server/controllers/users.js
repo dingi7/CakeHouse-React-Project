@@ -1,16 +1,35 @@
 const router = require('express').Router();
-const { isGuest } = require('../middlewares/guards');
-const { register, login, logout } = require('../services/users');
+const { isGuest, isAuthorized } = require('../middlewares/guards');
+const { register, login, logout, getAll, authorize } = require('../services/users');
 const mapErrors = require('../utils/mapper');
 
+router.get('/', isAuthorized(), async (req, res) => {
+    const data = await getAll();
+    res.json(data);
+});
+
+router.post('/authorize/:id', isAuthorized(), async (req, res) => {
+    const data = await authorize(req.params.id);
+    res.json(data);
+});
 
 router.post('/register', isGuest(), async (req, res) => {
     try {
-        if (req.body.password.trim() == '' || req.body.email.trim() == '' || req.body.name.trim() == '' || req.body.phoneNumber.trim() == '') {
+        if (
+            req.body.password.trim() == '' ||
+            req.body.email.trim() == '' ||
+            req.body.name.trim() == '' ||
+            req.body.phoneNumber.trim() == ''
+        ) {
             throw new Error('All fields are required');
         }
 
-        const result = await register(req.body.email.trim().toLowerCase(), req.body.name.trim(), req.body.phoneNumber.trim(), req.body.password.trim());
+        const result = await register(
+            req.body.email.trim().toLowerCase(),
+            req.body.name.trim(),
+            req.body.phoneNumber.trim(),
+            req.body.password.trim()
+        );
         res.status(201).json(result);
     } catch (err) {
         console.error(err.message);
@@ -24,7 +43,10 @@ router.post('/login', isGuest(), async (req, res) => {
         if (req.body.password.trim() == '' || req.body.email.trim() == '') {
             throw new Error('Email and password are required');
         }
-        const result = await login(req.body.email.trim().toLowerCase(), req.body.password.trim());
+        const result = await login(
+            req.body.email.trim().toLowerCase(),
+            req.body.password.trim()
+        );
         res.json(result);
     } catch (err) {
         console.error(err.message);

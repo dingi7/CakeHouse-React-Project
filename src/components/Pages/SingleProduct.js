@@ -1,11 +1,9 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { AuthContext } from '../contexts/AuthContext';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export const SingleProductPage = () => {
-    const { accessData } = useContext(AuthContext);
     const { id } = useParams();
     const [cake, setCake] = useState({});
     useEffect(() => {
@@ -22,22 +20,6 @@ export const SingleProductPage = () => {
     };
     const [cart, setCart] = useState(getCartFromLocalStorage());
     const addToCart = () => {
-        if (!accessData) {
-            toast.error(
-                'Please log in to be able to add this item to your shopping cart!',
-                {
-                    position: 'top-right',
-                    autoClose: 2000,
-                    hideProgressBar: true,
-                    closeOnClick: true,
-                    pauseOnHover: false,
-                    draggable: true,
-                    progress: undefined,
-                    theme: 'light',
-                }
-            );
-            return;
-        }
         const item = {
             name: cake.name,
             price: cake.price,

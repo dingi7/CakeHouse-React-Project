@@ -9,7 +9,8 @@ export const Logout = () => {
 
     useEffect(() => {
         setAccessData(null);
-        navigate('/');
+        localStorage.removeItem('access_info');
+        navigate('/login');
         toast.success('Successfully logged out!', {
             position: 'top-right',
             autoClose: 3000,

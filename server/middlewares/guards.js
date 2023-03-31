@@ -29,8 +29,19 @@ function isOwner() {
     };
 }
 
+function isAuthorized () { 
+    return (req, res, next) => {
+        if (req.user && req.user.autorization == "Admin") {
+            next();
+        } else {
+            res.status(403).json({ message: 'You are not authorized to do that!' });
+        }
+    };
+}
+
 module.exports = {
     isAuth,
     isGuest,
     isOwner,
+    isAuthorized
 };

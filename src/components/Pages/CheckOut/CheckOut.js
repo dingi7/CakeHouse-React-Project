@@ -13,13 +13,16 @@ import { Thanks } from '../../Partials/Thanks/Thanks';
 export const CheckOutPage = () => {
     const { accessData } = useContext(AuthContext);
     const { cart, totalPrice } = getCartFromLocalStorage();
-    const [isOrderPlaced, setIsOrderPlaced] = useState(false)
-    const [orderId, setOrderId] = useState('')
+    const [isOrderPlaced, setIsOrderPlaced] = useState(false);
+    const [orderId, setOrderId] = useState('');
 
     const [orderData, setOrderData] = useState({
         deliveryMethod: 'pickup',
-        paymentMethod: 'card',
+        paymentMethod: 'cash',
         address: '',
+        firstName: '',
+        lastName: '',
+        phoneNumber: '',
     });
 
     const onFormChangeHandler = (e) => {
@@ -37,7 +40,7 @@ export const CheckOutPage = () => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'x-authorization': accessData.accessToken,
+                'x-authorization': !accessData ? '' : accessData.accessToken,
             },
             body: JSON.stringify({
                 location:
@@ -47,6 +50,9 @@ export const CheckOutPage = () => {
                 paymentMethod: orderData.paymentMethod,
                 total: totalPrice,
                 products: products,
+                firstName: orderData.firstName,
+                lastName: orderData.lastName,
+                phoneNumber: orderData.phoneNumber
             }),
         });
         const data = await responce.json();
@@ -92,10 +98,17 @@ export const CheckOutPage = () => {
                         </tr>
                     </tfoot>
                 </table>
-
+                {!accessData && (
+                    <div className={styles['checkout']}>
+                        <p>
+                            <Link to="/login">Login</Link> or continue as guest
+                        </p>
+                    </div>
+                )}
                 <div className={styles['checkout']}>
                     <div className={styles['checkout-box']}>
                         <h2 className={styles.checkoutHeader}>Delivery</h2>
+                        <br></br>
                         <input
                             type="radio"
                             id="pickup"
@@ -127,19 +140,9 @@ export const CheckOutPage = () => {
                         )}
                     </div>
                 </div>
-
                 <div className={styles['checkout']}>
                     <div className={styles['checkout-box']}>
                         <h2 className={styles.checkoutHeader}>Payment</h2>
-                        <input
-                            type="radio"
-                            id="card"
-                            name="paymentMethod"
-                            value="card"
-                            checked={orderData.paymentMethod === 'card'}
-                            onChange={onFormChangeHandler}
-                        />
-                        <label htmlFor="card">Card</label>
                         <input
                             type="radio"
                             id="cash"
@@ -149,7 +152,55 @@ export const CheckOutPage = () => {
                             onChange={onFormChangeHandler}
                         />
                         <label htmlFor="cash">Cash</label>
+                        <input
+                            type="radio"
+                            id="card"
+                            name="paymentMethod"
+                            value="card"
+                            checked={orderData.paymentMethod === 'card'}
+                            onChange={onFormChangeHandler}
+                        />
+                        <label htmlFor="card">Card</label>
                     </div>
+                </div>
+                {accessData ? (
+                    ''
+                ) : (
+                    <div className={styles['checkout']}>
+                        <div className={styles['checkout-box']}>
+                            <h2 className={styles.checkoutHeader}>
+                                Personal information
+                            </h2>
+                            <br></br>
+                            <label htmlFor="firstName">First Name:</label>
+                            <input
+                                type="text"
+                                id="firstName"
+                                name='firstName'
+                                value={orderData.firstName}
+                                onChange={onFormChangeHandler}
+                            />
+                            <label htmlFor="lastName">Last Name:</label>
+                            <input
+                                type="text"
+                                id="lastName"
+                                name='lastName'
+                                value={orderData.lastName}
+                                onChange={onFormChangeHandler}
+                            />
+                            <label htmlFor="phoneNumber">Phone number:</label>
+                            <input
+                                type="text"
+                                id="phoneNumber"
+                                name='phoneNumber'
+                                value={orderData.phoneNumber}
+                                onChange={onFormChangeHandler}
+                            />
+                        </div>
+                    </div>
+                )}
+
+                <div className={styles['checkout']}>
                     <button
                         className={styles.placeOrderButton}
                         onClick={onCheckOut}
@@ -159,12 +210,9 @@ export const CheckOutPage = () => {
                 </div>
             </>
         );
-    } else if(isOrderPlaced){
-        return(
-            <Thanks orderId={orderId}/>
-        )
-    }
-    else {
+    } else if (isOrderPlaced) {
+        return <Thanks orderId={orderId} />;
+    } else {
         return (
             <>
                 <h1>Checkout</h1>
