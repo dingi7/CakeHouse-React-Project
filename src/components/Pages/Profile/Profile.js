@@ -1,9 +1,30 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { AuthContext } from '../../contexts/AuthContext';
 import styles from './profile.module.css';
 
 export const ProfilePage = () => {
     const { accessData } = useContext(AuthContext);
+    const [readOnly, setReadOnly] = useState(true);
+
+    const [userData, setUserData] = useState({
+        name: accessData.fullName,
+        phoneNumber: accessData.phoneNumber,
+        email: accessData.email,
+    });
+
+    const onFormChangeHandler = (e) => {
+        setUserData((state) => ({
+            ...state,
+            [e.target.name]: e.target.value,
+        }));
+    };
+
+    const handleEditButtonClick = () => {
+        if (!readOnly) {
+            // send the req
+        }
+        setReadOnly(!readOnly);
+    };
     return (
         <>
             <h1>Profile</h1>
@@ -14,8 +35,10 @@ export const ProfilePage = () => {
                     <input
                         type="text"
                         id="name"
-                        defaultValue={accessData.fullName}
-                        readOnly
+                        name="name"
+                        value={userData.name}
+                        onChange={onFormChangeHandler}
+                        readOnly={readOnly}
                     />
                 </div>
                 <div className={styles.inputField}>
@@ -23,8 +46,10 @@ export const ProfilePage = () => {
                     <input
                         type="tel"
                         id="phone"
-                        defaultValue={accessData.phoneNumber}
-                        readOnly
+                        name="phoneNumber"
+                        value={userData.phoneNumber}
+                        onChange={onFormChangeHandler}
+                        readOnly={readOnly}
                     />
                 </div>
                 <div className={styles.inputField}>
@@ -32,8 +57,10 @@ export const ProfilePage = () => {
                     <input
                         type="email"
                         id="email"
-                        defaultValue={accessData.email}
-                        readOnly
+                        name="email"
+                        value={userData.email}
+                        onChange={onFormChangeHandler}
+                        readOnly={readOnly}
                     />
                 </div>
                 <div className={styles.inputField}>
@@ -44,6 +71,15 @@ export const ProfilePage = () => {
                         defaultValue={accessData.autorization}
                         readOnly
                     />
+                </div>
+                <div className={styles['button-wrapper']}>
+                    <button
+                        className={styles['button']}
+                        onClick={handleEditButtonClick}
+                    >
+                        {readOnly ? 'Edit Profile' : 'Save Changes'}
+                    </button>
+                    <button className={styles['button']}>View orders</button>
                 </div>
             </div>
         </>

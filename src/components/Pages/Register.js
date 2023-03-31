@@ -1,8 +1,8 @@
 import { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import { AuthContext } from '../contexts/AuthContext';
-import 'react-toastify/dist/ReactToastify.css';
+import { registerReq } from '../utils/request';
+import { error } from '../utils/notificationHandler';
 
 export const RegisterPage = () => {
     const { setAccessData } = useContext(AuthContext);
@@ -19,36 +19,19 @@ export const RegisterPage = () => {
     const navigate = useNavigate();
     const onFormSubmit = async (e) => {
         e.preventDefault();
-        const resp = await fetch('http://localhost:3030/users/register', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                email: userData.email,
-                name: userData.name,
-                phoneNumber: userData.phoneNumber,
-                password: userData.password,
-            }),
-        });
-        const data = await resp.json();
-        if (!resp.ok) {
-            toast.error(data.message, {
-                position: 'top-right',
-                autoClose: 2000,
-                hideProgressBar: true,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: 'light',
-            });
-        } else {
+        try {
+            const data = await registerReq(
+                userData.email,
+                userData.name,
+                userData.phoneNumber,
+                userData.password
+            );
             setAccessData(data);
             localStorage.setItem('access_info', JSON.stringify(data));
             navigate('/profile', { replace: true });
+        } catch (err) {
+            error(err.message);
         }
-        // localStorage.setItem('access_token', token);
     };
 
     return (

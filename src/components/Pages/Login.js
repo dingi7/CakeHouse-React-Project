@@ -1,8 +1,8 @@
 import { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { AuthContext } from '../contexts/AuthContext';
+import { loginReq } from '../utils/request';
+import { error } from '../utils/notificationHandler';
 
 export const LoginPage = () => {
     const { setAccessData } = useContext(AuthContext);
@@ -18,32 +18,13 @@ export const LoginPage = () => {
 
     const onFormSubmit = async (e) => {
         e.preventDefault();
-        const resp = await fetch('http://localhost:3030/users/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                email: userData.email,
-                password: userData.password,
-            }),
-        });
-        const data = await resp.json();
-        if (!resp.ok) {
-            toast.error(data.message, {
-                position: 'top-right',
-                autoClose: 2000,
-                hideProgressBar: true,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: 'light',
-            });
-        } else {
+        try {
+            const data = await loginReq(userData.email, userData.password);
             setAccessData(data);
             localStorage.setItem('access_info', JSON.stringify(data));
             navigate('/profile', { replace: true });
+        } catch (err) {
+            error(err.message)
         }
     };
 
