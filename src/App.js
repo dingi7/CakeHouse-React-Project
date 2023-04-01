@@ -14,6 +14,7 @@ import { PublicRoute } from './components/Pages/Routes/PublicRoute';
 import { LockedRoute } from './components/Pages/Routes/LockedRoute';
 import { AdminPage } from './components/Pages/AdminPage/AdminPage';
 import { Logout } from './components/Pages/Logout';
+import { About } from './components/Pages/About/About';
 
 function App() {
     return (
@@ -33,6 +34,7 @@ function App() {
             <Header></Header>
             <Routes>
                 <Route path="*" element={<h1 className="page-title">404</h1>} />
+                <Route path="/about" element={<About/>} />
                 <Route path="/" element={<HomePage />} />
                 <Route path="/shop" element={<ShopPage />} />
                 <Route path="/shop/:id" element={<SingleProductPage />} />
