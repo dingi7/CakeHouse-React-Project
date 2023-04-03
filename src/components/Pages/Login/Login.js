@@ -1,8 +1,8 @@
 import { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { AuthContext } from '../contexts/AuthContext';
-import { loginReq } from '../utils/request';
-import { error } from '../utils/notificationHandler';
+import { AuthContext } from '../../contexts/AuthContext';
+import { loginReq } from '../../utils/request';
+import { error } from '../../utils/notificationHandler';
 
 export const LoginPage = () => {
     const { setAccessData } = useContext(AuthContext);
@@ -24,7 +24,7 @@ export const LoginPage = () => {
             localStorage.setItem('access_info', JSON.stringify(data));
             navigate('/profile', { replace: true });
         } catch (err) {
-            error(err.message)
+            error(err.message);
         }
     };
 
@@ -50,6 +50,7 @@ export const LoginPage = () => {
                         onChange={onFormChangeHandler}
                     />
                     <button
+                        data-testid="login-btn"
                         type="submit"
                         className="btn"
                         onClick={onFormSubmit}

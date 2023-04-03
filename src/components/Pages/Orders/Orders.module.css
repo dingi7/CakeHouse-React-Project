@@ -1,0 +1,27 @@
+.img{
+    max-width: 500px;
+    max-height: 90px;
+}
+
+.order-list th,
+.order-list td{
+    text-align: center;
+    padding: 5px;
+    border: 1px solid #ddd;
+    line-height: 1;
+}
+
+.order-list {
+    flex-basis: 40%;
+    padding: 10px;
+}
+
+.order-list h2 {
+    margin-bottom: 10px;
+}
+
+.order-list table {
+    width: 50%;
+    border-collapse: collapse;
+}
+

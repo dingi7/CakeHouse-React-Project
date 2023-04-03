@@ -1,0 +1,35 @@
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.info {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.form label {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.form input,
+.form textarea {
+    display: block;
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border: none;
+    border-radius: 0.25rem;
+}
+
+.form textarea {
+    resize: vertical;
+    height: 10rem;
+}
+
+.map {
+    display: flex;
+    justify-content: center;
+}

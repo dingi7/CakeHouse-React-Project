@@ -3,7 +3,7 @@ import { HomePage } from './components/Pages/Home';
 import { Header } from './components/Partials/Header';
 import { ShopPage } from './components/Pages/Shop';
 import { SingleProductPage } from './components/Pages/SingleProduct';
-import { LoginPage } from './components/Pages/Login';
+import { LoginPage } from './components/Pages/Login/Login';
 import { RegisterPage } from './components/Pages/Register';
 import { ShoppingCartPage } from './components/Pages/ShoppingCart';
 import { ProfilePage } from './components/Pages/Profile/Profile';
@@ -15,6 +15,8 @@ import { LockedRoute } from './components/Pages/Routes/LockedRoute';
 import { AdminPage } from './components/Pages/AdminPage/AdminPage';
 import { Logout } from './components/Pages/Logout';
 import { About } from './components/Pages/About/About';
+import { Orders } from './components/Pages/Orders/Orders';
+import { ContactPage } from './components/Pages/Contact/ContactPage';
 
 function App() {
     return (
@@ -34,7 +36,8 @@ function App() {
             <Header></Header>
             <Routes>
                 <Route path="*" element={<h1 className="page-title">404</h1>} />
-                <Route path="/about" element={<About/>} />
+                <Route path="/about" element={<About />} />
+                <Route path="/contact" element={<ContactPage />} />
                 <Route path="/" element={<HomePage />} />
                 <Route path="/shop" element={<ShopPage />} />
                 <Route path="/shop/:id" element={<SingleProductPage />} />
@@ -53,6 +56,10 @@ function App() {
                 <Route
                     path="/logout"
                     element={<PrivateRoute component={Logout} />}
+                ></Route>
+                <Route
+                    path="/orders"
+                    element={<PrivateRoute component={Orders} />}
                 ></Route>
                 <Route
                     path="/profile"

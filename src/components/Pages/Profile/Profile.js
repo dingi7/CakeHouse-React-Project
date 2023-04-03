@@ -1,10 +1,12 @@
 import { useContext, useState } from 'react';
 import { AuthContext } from '../../contexts/AuthContext';
 import styles from './profile.module.css';
+import { useNavigate } from 'react-router-dom';
 
 export const ProfilePage = () => {
     const { accessData } = useContext(AuthContext);
     const [readOnly, setReadOnly] = useState(true);
+    const navigate = useNavigate()
 
     const [userData, setUserData] = useState({
         name: accessData.fullName,
@@ -25,6 +27,11 @@ export const ProfilePage = () => {
         }
         setReadOnly(!readOnly);
     };
+
+    const handleViewOrdersButtonClick = (e) => {
+        e.preventDefault()
+        navigate('/orders')
+    }
     return (
         <>
             <h1>Profile</h1>
@@ -79,7 +86,7 @@ export const ProfilePage = () => {
                     >
                         {readOnly ? 'Edit Profile' : 'Save Changes'}
                     </button>
-                    <button className={styles['button']}>View orders</button>
+                    <button className={styles['button']} onClick={handleViewOrdersButtonClick}>View orders</button>
                 </div>
             </div>
         </>
