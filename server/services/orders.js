@@ -4,6 +4,10 @@ async function getAll() {
     return Order.find({ fulfilled: false }).populate({ path: 'products', options: { strictPopulate: false } }).populate('owner');
 }
 
+async function getUserOrders(ownerId){
+    return Order.find({ owner: ownerId }).populate({ path: 'products', options: { strictPopulate: false } }).populate('owner');
+}
+
 async function create(order) {
     const result = new Order(order);
     await result.save();
@@ -27,4 +31,5 @@ module.exports = {
     create,
     getById,
     fulfill,
+    getUserOrders
 };

@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { isGuest, isAuthorized } = require('../middlewares/guards');
+const { isGuest, isAuthorized, isAuth } = require('../middlewares/guards');
 const { register, login, logout, getAll, authorize } = require('../services/users');
 const mapErrors = require('../utils/mapper');
 
@@ -59,5 +59,7 @@ router.get('/logout', (req, res) => {
     logout(req.user?.token);
     res.status(204).end();
 });
+
+// router.put('/:id', isAuth())
 
 module.exports = router;

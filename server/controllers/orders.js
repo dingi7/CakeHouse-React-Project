@@ -8,6 +8,11 @@ router.get('/', isAuthorized(), async (req, res) => {
     res.json(data)
 });
 
+router.get('/user', isAuth(), async (req,res) => {
+    const data = await api.getUserOrders(req.user._id)
+    res.json(data)
+})
+
 router.post('/', async (req, res) => {
     let order = {};
     if (req.user) {
