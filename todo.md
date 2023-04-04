@@ -8,8 +8,12 @@
 
 [X] Auth
 
-[ ] Implement Admin functionality
+[X] Implement Admin functionality
 
 [ ] Separate css in modules
 
-[ ] Guest orders
+[X] Guest orders
+
+[X] Order history
+
+[X] External API
