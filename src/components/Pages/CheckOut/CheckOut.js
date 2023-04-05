@@ -7,8 +7,9 @@ import {
     getCartFromLocalStorage,
 } from '../../utils/shoppingCartUtils';
 import { AuthContext } from '../../contexts/AuthContext';
-import { toast } from 'react-toastify';
 import { Thanks } from '../../Partials/Thanks/Thanks';
+import { orderPost } from '../../utils/request';
+import { errorNotification } from '../../utils/notificationHandler';
 
 export const CheckOutPage = () => {
     const { accessData } = useContext(AuthContext);
@@ -36,44 +37,28 @@ export const CheckOutPage = () => {
         e.preventDefault();
         let products = [];
         cart.map((c) => products.push(c.item.id));
-        const responce = await fetch('http://localhost:3030/orders', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'x-authorization': !accessData ? '' : accessData.accessToken,
-            },
-            body: JSON.stringify({
-                location:
-                    orderData.deliveryMethod === 'delivery'
-                        ? orderData.address
-                        : 'In store pick up',
-                paymentMethod: orderData.paymentMethod,
-                total: totalPrice,
-                products: products,
-                firstName: orderData.firstName,
-                lastName: orderData.lastName,
-                phoneNumber: orderData.phoneNumber
-            }),
-        });
-        const data = await responce.json();
-        if (!responce.ok) {
-            toast.error(data.message, {
-                position: 'top-right',
-                autoClose: 3000,
-                hideProgressBar: true,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: 'light',
-            });
-            return;
+        const body = {
+            location:
+                orderData.deliveryMethod === 'delivery'
+                    ? orderData.address
+                    : 'In store pick up',
+            paymentMethod: orderData.paymentMethod,
+            total: totalPrice,
+            products: products,
+            firstName: orderData.firstName,
+            lastName: orderData.lastName,
+            phoneNumber: orderData.phoneNumber,
+        };
+        try {
+            const data = await orderPost(accessData ? accessData.accessToken : null , body);
+            clearShoppingCart();
+            setIsOrderPlaced(true);
+            setOrderId(data._id);
+        } catch (err) {
+            errorNotification(err.message);
         }
-        clearShoppingCart();
-        setIsOrderPlaced(true);
-        setOrderId(data._id);
     };
-    if (totalPrice > 0 && !isOrderPlaced) {
+    if (totalPrice > 5 && !isOrderPlaced) {
         return (
             <>
                 <h1>Checkout</h1>
@@ -176,7 +161,7 @@ export const CheckOutPage = () => {
                             <input
                                 type="text"
                                 id="firstName"
-                                name='firstName'
+                                name="firstName"
                                 value={orderData.firstName}
                                 onChange={onFormChangeHandler}
                             />
@@ -184,7 +169,7 @@ export const CheckOutPage = () => {
                             <input
                                 type="text"
                                 id="lastName"
-                                name='lastName'
+                                name="lastName"
                                 value={orderData.lastName}
                                 onChange={onFormChangeHandler}
                             />
@@ -192,7 +177,7 @@ export const CheckOutPage = () => {
                             <input
                                 type="text"
                                 id="phoneNumber"
-                                name='phoneNumber'
+                                name="phoneNumber"
                                 value={orderData.phoneNumber}
                                 onChange={onFormChangeHandler}
                             />

@@ -1,12 +1,21 @@
 import { useEffect, useState } from 'react';
 import { Cake } from '../Partials/Cake';
+import { getProductsReq } from '../utils/request';
+import { errorNotification } from '../utils/notificationHandler';
 
 export const ShopPage = () => {
     const [cakes, setCakes] = useState([]);
+
     useEffect(() => {
-        fetch('http://localhost:3030/data/catalog')
-            .then((res) => res.json())
-            .then((data) => setCakes(data));
+        const fetchData = async () => {
+            try {
+                const products = await getProductsReq();
+                setCakes(products);
+            } catch (err) {
+                errorNotification(err.message);
+            }
+        };
+        fetchData();
     }, []);
 
     return (

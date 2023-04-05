@@ -1,9 +1,16 @@
 import { useContext, useEffect, useState } from 'react';
-import { toast } from 'react-toastify';
 import { AuthContext } from '../../contexts/AuthContext';
 import { Order } from '../../Partials/Orders';
 import { User } from '../../Partials/User';
 import styles from './admin-page.module.css';
+import {
+    authorizeUserPost,
+    createProductPost,
+    fulfillOrderPost,
+    getAllOrdersReq,
+    getAllUsersReq,
+} from '../../utils/request';
+import { errorNotification, successNotification } from '../../utils/notificationHandler';
 
 export const AdminPage = () => {
     const { accessData } = useContext(AuthContext);
@@ -24,161 +31,71 @@ export const AdminPage = () => {
     };
     const onFormSubmitHandler = async (e) => {
         e.preventDefault();
-        const response = await fetch(`http://localhost:3030/data/catalog`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'x-authorization': accessData.accessToken,
-            },
-            body: JSON.stringify({
-                name: productData.name,
-                description: productData.description,
-                price: productData.price,
-                img: productData.img,
-            }),
-        });
-        const data = await response.json();
-        if (!response.ok) {
-            toast.error(data.message, {
-                position: 'top-right',
-                autoClose: 2000,
-                hideProgressBar: true,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: 'light',
-            });
-        } else {
-            toast.success('Product successfuly created!', {
-                position: 'top-right',
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: false,
-                draggable: true,
-                progress: undefined,
-                theme: 'light',
-            });
+        const body = {
+            name: productData.name,
+            description: productData.description,
+            price: productData.price,
+            img: productData.img,
+        };
+        try {
+            await createProductPost(accessData.accessToken, body);
+            successNotification('Product was successfuly created!');
             setProductData({
                 name: '',
                 description: '',
                 price: '',
                 img: '',
             });
+        } catch (err) {
+            errorNotification(err.message);
         }
     };
 
     const onOrderFulfill = async (id) => {
-        const response = await fetch(
-            `http://localhost:3030/orders/${id}/fulfill`,
-            {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'x-authorization': accessData.accessToken,
-                },
-            }
-        );
-        const data = await response.json();
-        if (!response.ok) {
-            toast.error(data.message, {
-                position: 'top-right',
-                autoClose: 2000,
-                hideProgressBar: true,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: 'light',
-            });
-            return;
+        try {
+            await fulfillOrderPost(id, accessData.accessToken);
+            setOrders((state) => state.filter((s) => s._id !== id));
+            successNotification('Order was successfully fulfilled!')
+        } catch (err) {
+            errorNotification(err.message);
         }
-        setOrders((state) => state.filter((s) => s._id !== id));
     };
 
     const onUserAuthorization = async (id) => {
-        const response = await fetch(
-            `http://localhost:3030/users/authorize/${id}`,
-            {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'x-authorization': accessData.accessToken,
-                },
-            }
-        );
-        const data = await response.json();
-        if (!response.ok) {
-            toast.error(data.message, {
-                position: 'top-right',
-                autoClose: 2000,
-                hideProgressBar: true,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: 'light',
-            });
-            return;
+        try {
+            await authorizeUserPost(id, accessData.accessToken);
+            setUsers((state) =>
+                state.map((user) =>
+                    user._id === id
+                        ? 
+                        {
+                            ...user,
+                            autorization:
+                                user.autorization === 'User'
+                                    ? 'Admin'
+                                    : 'User',
+                        }
+                        : user
+                )
+            );
+        } catch (err) {
+            errorNotification(err.message);
         }
-        setUsers((state) =>
-            state.map((user) =>
-                user._id === id
-                    ? {
-                          ...user,
-                          autorization:
-                              user.autorization === 'User' ? 'Admin' : 'User',
-                      }
-                    : user
-            )
-        );
     };
 
     useEffect(() => {
-        fetch('http://localhost:3030/orders', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'x-authorization': accessData.accessToken,
-            },
-        })
-            .then((res) => {
-                if (res.ok) {
-                    return res.json();
-                } else {
-                    throw new Error('You are not authorized!');
-                }
-            })
-            .then((data) => {
-                setOrders(data);
-            })
-            .catch((error) => {
-                console.error(
-                    'There was a problem fetching the orders:',
-                    error
-                );
-            });
-        fetch('http://localhost:3030/users', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'x-authorization': accessData.accessToken,
-            },
-        })
-            .then((res) => {
-                if (res.ok) {
-                    return res.json();
-                } else {
-                    throw new Error('You are not authorized!');
-                }
-            })
-            .then((data) => {
-                setUsers(data);
-            })
-            .catch((error) => {
-                console.error('There was a problem fetching the users:', error);
-            });
+        const fetchData = async () => {
+            try {
+                const orders = await getAllOrdersReq(accessData.accessToken);
+                setOrders(orders);
+
+                const users = await getAllUsersReq(accessData.accessToken)
+                setUsers(users)
+            } catch (err) {
+                errorNotification(err.message);
+            }
+        };
+        fetchData();
     }, [accessData.accessToken]);
     return (
         <div className={styles['admin-page-container']}>
@@ -221,7 +138,15 @@ export const AdminPage = () => {
                         {orders.map((o) => (
                             <Order
                                 {...o}
-                                owner={o.owner ? o.owner : {name: o.name, phoneNumber: o.phoneNumber}}
+                                owner={
+                                    o.owner
+                                        ? o.owner
+                                        : 
+                                        {
+                                            name: o.name,
+                                            phoneNumber: o.phoneNumber,
+                                        }
+                                }
                                 key={o._id}
                                 onOrderFulfill={onOrderFulfill}
                             ></Order>

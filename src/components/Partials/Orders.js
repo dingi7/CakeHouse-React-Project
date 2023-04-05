@@ -20,9 +20,9 @@ export const Order = ({
             <td>
                 {products.map((p) => (
                     <Link key={p._id} to={`/shop/${p._id}`}>
-                        <p>{p.name}</p>
+                        <img style={{ maxWidth: '500px', maxHeight: '90px' }} src={p.img} alt='img'/>
                     </Link>
-                ))}
+                ))}``
             </td>
             <td>{location}</td>
             <td>Pending</td>

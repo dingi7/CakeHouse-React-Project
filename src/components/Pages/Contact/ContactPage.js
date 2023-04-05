@@ -1,6 +1,11 @@
 import { useState } from 'react';
 import styles from './Contact.module.css';
 import MyComponent from '../../Partials/GoogleMap';
+import {
+    errorNotification,
+    successNotification,
+} from '../../utils/notificationHandler';
+import { sendMessage } from '../../utils/request';
 
 export const ContactPage = () => {
     const [userData, setUserData] = useState({
@@ -11,6 +16,25 @@ export const ContactPage = () => {
 
     const onFormChangeHandler = (e) => {
         setUserData((state) => ({ ...state, [e.target.name]: e.target.value }));
+    };
+
+    const onFormSubmitHandler = async (e) => {
+        e.preventDefault();
+        try {
+            await sendMessage({
+                name: userData.name,
+                email: userData.email,
+                message: userData.message,
+            });
+            successNotification('Message was successfully sent!');
+            setUserData({
+                name: '',
+                email: '',
+                message: '',
+            });
+        } catch (err) {
+            errorNotification(err.message);
+        }
     };
     return (
         <div className={styles.container}>
@@ -57,9 +81,11 @@ export const ContactPage = () => {
                     id="message"
                     required
                 />
-                <button type="submit">Submit</button>
+                <button type="submit" onClick={onFormSubmitHandler}>
+                    Submit
+                </button>
             </form>
-                <h1>Find us</h1>
+            <h1>Find us</h1>
             <div id="map" className={styles.map}>
                 <MyComponent></MyComponent>
             </div>

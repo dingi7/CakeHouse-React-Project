@@ -1,6 +1,6 @@
 import { toast } from "react-toastify";
 
-export const error = (message) => {
+export const errorNotification = (message) => {
     toast.error(message, {
         position: 'top-right',
         autoClose: 2000,
@@ -12,3 +12,16 @@ export const error = (message) => {
         theme: 'light',
     });
 };
+
+export const successNotification = (message) => {
+    toast.success(message, {
+        position: 'top-right',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+    });
+}

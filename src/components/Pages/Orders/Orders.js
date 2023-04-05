@@ -3,6 +3,8 @@ import { AuthContext } from '../../contexts/AuthContext';
 import { SingleOrder } from './SingleItem';
 import styles from './Orders.module.css';
 import { useNavigate } from 'react-router-dom';
+import { getUsersOrdersReq } from '../../utils/request';
+import { errorNotification } from '../../utils/notificationHandler';
 
 export const Orders = () => {
     const { accessData } = useContext(AuthContext);
@@ -10,31 +12,16 @@ export const Orders = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch('http://localhost:3030/orders/user', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'x-authorization': accessData.accessToken,
-            },
-        })
-            .then((res) => {
-                if (res.ok) {
-                    return res.json();
-                } else {
-                    throw new Error('You are not authenticated!');
-                }
-            })
-            .then((data) => {
-                setOrders(data);
-            })
-            .catch((error) => {
-                console.error(
-                    'There was a problem fetching the orders:',
-                    error
-                );
-            });
+        const fetchOrders = async () => {
+            try{
+                const orders = await getUsersOrdersReq(accessData.accessToken)
+                setOrders(orders);
+            }catch(err){
+                errorNotification(err.message)
+            }
+        }
+        fetchOrders()
     }, [accessData.accessToken, setOrders]);
-    console.log(orders);
     return (
         <div style={{ textAlign: 'center' }}>
             <div className={styles['order-list']}>

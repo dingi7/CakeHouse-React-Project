@@ -2,7 +2,7 @@ import { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext';
 import { loginReq } from '../../utils/request';
-import { error } from '../../utils/notificationHandler';
+import { errorNotification } from '../../utils/notificationHandler';
 
 export const LoginPage = () => {
     const { setAccessData } = useContext(AuthContext);
@@ -24,7 +24,7 @@ export const LoginPage = () => {
             localStorage.setItem('access_info', JSON.stringify(data));
             navigate('/profile', { replace: true });
         } catch (err) {
-            error(err.message);
+            errorNotification(err.message);
         }
     };
 

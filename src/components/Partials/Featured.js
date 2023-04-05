@@ -2,13 +2,21 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Cake } from './Cake';
 import { AnimationOnScroll } from 'react-animation-on-scroll';
+import { errorNotification } from '../utils/notificationHandler';
+import { getProductsReq } from '../utils/request';
 
 export const Featured = () => {
     const [cakes, setCakes] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:3030/data/catalog')
-            .then((res) => res.json())
-            .then((data) => setCakes(data));
+        const fetchData = async () => {
+            try {
+                const products = await getProductsReq();
+                setCakes(products);
+            } catch (err) {
+                errorNotification(err.message);
+            }
+        };
+        fetchData();
     }, []);
     return (
         <section id="featured-books">

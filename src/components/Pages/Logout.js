@@ -1,7 +1,7 @@
 import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import { AuthContext } from '../contexts/AuthContext';
+import { successNotification } from '../utils/notificationHandler';
 
 export const Logout = () => {
     const { setAccessData } = useContext(AuthContext);
@@ -11,16 +11,7 @@ export const Logout = () => {
         setAccessData(null);
         localStorage.removeItem('access_info');
         navigate('/login');
-        toast.success('Successfully logged out!', {
-            position: 'top-right',
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: false,
-            draggable: true,
-            progress: undefined,
-            theme: 'light',
-        });
+        successNotification('Successfully logged out!')
     }, [setAccessData, navigate]);
 
     return null;
