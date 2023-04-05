@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styles from './Contact.module.css';
-import MyComponent from '../../Partials/GoogleMap';
+import GoogleMaps from '../../Partials/GoogleMap';
 import {
     errorNotification,
     successNotification,
@@ -87,7 +87,7 @@ export const ContactPage = () => {
             </form>
             <h1>Find us</h1>
             <div id="map" className={styles.map}>
-                <MyComponent></MyComponent>
+                <GoogleMaps></GoogleMaps>
             </div>
         </div>
     );

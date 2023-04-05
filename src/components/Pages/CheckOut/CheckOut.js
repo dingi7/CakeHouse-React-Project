@@ -6,10 +6,10 @@ import {
     clearShoppingCart,
     getCartFromLocalStorage,
 } from '../../utils/shoppingCartUtils';
-import { AuthContext } from '../../contexts/AuthContext';
-import { Thanks } from '../../Partials/Thanks/Thanks';
+import { AuthContext } from '../../../contexts/AuthContext';
 import { orderPost } from '../../utils/request';
 import { errorNotification } from '../../utils/notificationHandler';
+import { Thanks } from '../Thanks/Thanks';
 
 export const CheckOutPage = () => {
     const { accessData } = useContext(AuthContext);
