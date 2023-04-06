@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Product } from '../Partials/CartProduct';
+import { Product } from '../components/CartProduct';
 import { getCartFromLocalStorage } from '../utils/shoppingCartUtils';
 
 export const ShoppingCartPage = () => {

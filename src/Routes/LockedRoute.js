@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { toast } from 'react-toastify';
-import { AuthContext } from '../../contexts/AuthContext';
+import { AuthContext } from '../contexts/AuthContext';
 
 export function LockedRoute({ path, component: Component, ...props }) {
     const { isAdmin } = useContext(AuthContext);

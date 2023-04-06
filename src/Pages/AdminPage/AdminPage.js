@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
-import { AuthContext } from '../../../contexts/AuthContext';
-import { Order } from '../../Partials/Orders';
-import { User } from '../../Partials/User';
+import { AuthContext } from '../../contexts/AuthContext';
+import { Order } from '../../components/Orders';
+import { User } from '../../components/User';
 import styles from './admin-page.module.css';
 import {
     authorizeUserPost,

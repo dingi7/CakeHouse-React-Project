@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import { LoginPage } from '../components/Pages/Login/Login';
+import { LoginPage } from '../Page/sLogin/Login';
 import { MemoryRouter } from 'react-router-dom';
 import { AuthContext } from '../components/contexts/AuthContext';
 

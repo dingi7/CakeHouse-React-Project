@@ -1,5 +1,5 @@
-import { Featured } from '../Partials/Featured';
-import { InfoSection } from '../Partials/InfoSection';
+import { Featured } from '../components/Featured';
+import { InfoSection } from '../components/InfoSection';
 import 'react-toastify/dist/ReactToastify.css';
 
 export const HomePage = () => {

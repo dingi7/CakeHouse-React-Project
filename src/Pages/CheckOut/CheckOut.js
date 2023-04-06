@@ -1,12 +1,12 @@
 import { useContext, useState } from 'react';
 import styles from './checkOut.module.css';
-import { Product } from '../../Partials/CartProduct';
+import { Product } from '../../components/CartProduct';
 import { Link } from 'react-router-dom';
 import {
     clearShoppingCart,
     getCartFromLocalStorage,
 } from '../../utils/shoppingCartUtils';
-import { AuthContext } from '../../../contexts/AuthContext';
+import { AuthContext } from '../../contexts/AuthContext';
 import { orderPost } from '../../utils/request';
 import { errorNotification } from '../../utils/notificationHandler';
 import { Thanks } from '../Thanks/Thanks';

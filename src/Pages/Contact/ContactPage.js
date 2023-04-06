@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styles from './Contact.module.css';
-import GoogleMaps from '../../Partials/GoogleMap';
+import GoogleMaps from '../../components/GoogleMap';
 import {
     errorNotification,
     successNotification,

@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import 'react-toastify/dist/ReactToastify.css';
 import { errorNotification, successNotification } from '../utils/notificationHandler';
 import { getSingleProductReq } from '../utils/request';
 

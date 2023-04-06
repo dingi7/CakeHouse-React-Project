@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Cake } from '../Partials/Cake';
+import { Cake } from '../components/Cake';
 import { getProductsReq } from '../utils/request';
 import { errorNotification } from '../utils/notificationHandler';
 

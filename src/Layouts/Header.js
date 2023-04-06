@@ -1,6 +1,6 @@
 import { Link, NavLink } from 'react-router-dom';
 import { useContext } from 'react';
-import { AuthContext } from '../../contexts/AuthContext';
+import { AuthContext } from '../contexts/AuthContext';
 // import { AuthContext } from '../../contexts/AuthContext';
 
 export const Header = () => {
@@ -15,7 +15,7 @@ export const Header = () => {
                             <div className="main-logo">
                                 <Link to="/">
                                     <img
-                                        src={require('../../logo.png')}
+                                        src={require('../logo.png')}
                                         alt="logo"
                                     />
                                 </Link>

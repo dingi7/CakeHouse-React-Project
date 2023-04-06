@@ -26,7 +26,7 @@ export const InfoSection = () => {
                                 </div>
                                 {/*banner-content*/}
                                 <img
-                                    src={require('../../banner.jpg')}
+                                    src={require('../banner.jpg')}
                                     alt="banner"
                                     className="banner-image"
                                 />

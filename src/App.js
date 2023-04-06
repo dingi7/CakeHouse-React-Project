@@ -1,22 +1,22 @@
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
-import { HomePage } from './components/Pages/Home';
-import { Header } from './components/Partials/Header';
-import { ShopPage } from './components/Pages/Shop';
-import { SingleProductPage } from './components/Pages/SingleProduct';
-import { LoginPage } from './components/Pages/Login/Login';
-import { RegisterPage } from './components/Pages/Register';
-import { ShoppingCartPage } from './components/Pages/ShoppingCart';
-import { ProfilePage } from './components/Pages/Profile/Profile';
-import { CheckOutPage } from './components/Pages/CheckOut/CheckOut';
+import { HomePage } from './Pages//Home';
+import { Header } from './Layouts/Header';
+import { ShopPage } from './Pages/Shop';
+import { SingleProductPage } from './Pages/SingleProduct';
+import { LoginPage } from './Pages//Login/Login';
+import { RegisterPage } from './Pages//Register';
+import { ShoppingCartPage } from './Pages//ShoppingCart';
+import { ProfilePage } from './Pages//Profile/Profile';
+import { CheckOutPage } from './Pages//CheckOut/CheckOut';
 import { ToastContainer } from 'react-toastify';
-import { LockedRoute } from './components/Routes/LockedRoute';
-import { PublicRoute } from './components/Routes/PublicRoute';
-import { PrivateRoute } from './components/Routes/PrivateRoute';
-import { AdminPage } from './components/Pages/AdminPage/AdminPage';
-import { Logout } from './components/Pages/Logout';
-import { About } from './components/Pages/About/About';
-import { Orders } from './components/Pages/Orders/Orders';
-import { ContactPage } from './components/Pages/Contact/ContactPage';
+import { LockedRoute } from './Routes/LockedRoute';
+import { PublicRoute } from './Routes/PublicRoute';
+import { PrivateRoute } from './Routes/PrivateRoute';
+import { AdminPage } from './Pages/AdminPage/AdminPage';
+import { Logout } from './Pages/Logout';
+import { About } from './Pages/About/About';
+import { Orders } from './Pages/Orders/Orders';
+import { ContactPage } from './Pages/Contact/ContactPage';
 
 function App() {
     return (
