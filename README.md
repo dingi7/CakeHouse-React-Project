@@ -1,37 +1,30 @@
 
-# Softuni's React JS's final project assigment
+# Softuni's React JS Final Project
 
-  
+Ecommerce React app that allows users to browse products, create and manage accounts, order products, view past orders, and contact the owners. Admins can create new products, view and fulfill orders, and manage user profiles.
 
-Ecommerce React app.
+## Essential Features
 
-  
+- Browse and order products
+- Create and manage accounts
+- View past orders
+- Contact the owners
+- Admins can create new products, view and fulfill orders, and manage user profiles
 
-# Essential features
+## Front-End
 
-  
-
-It gives the user the ability to browse products, make and manage accounts, order products, see past orders and contact the owners.
-
-  
-
-Users authenticated as Admin have the ability to create new products, view and fulfill orders, manage users' profiles.
-
- ## Front-End
-
- 1. React Router is used for routing. 
- 2. React Icons is used for icons.
- 3. React Animate on scroll is used for animations.
- 4. React Toastify is used for notifications. 
- 5. LocalStorage is used to persist users' sessions.
- 6. Protected routes are used to ensure page safety.
+- React Router for routing
+- React Icons for icons
+- React Animate on Scroll for animations
+- React Toastify for notifications
+- LocalStorage to persist user sessions
+- Protected routes to ensure page safety
 
 ## Back-End
 
- 1. Build on Node.js.
- 2. Used Express for server functionality.
- 3. Used MongoDB & Mongoose for Data Base.
-
+- Built on Node.js
+- Express for server functionality
+- MongoDB & Mongoose for database
   
 
 # App Deployment
