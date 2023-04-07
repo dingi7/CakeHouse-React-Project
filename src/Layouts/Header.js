@@ -1,6 +1,7 @@
 import { Link, NavLink } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../contexts/AuthContext';
+import './Header.css'
 // import { AuthContext } from '../../contexts/AuthContext';
 
 export const Header = () => {
@@ -171,11 +172,6 @@ export const Header = () => {
                                             </NavLink>
                                         </li>
                                     </ul>
-                                    <div className="hamburger">
-                                        <span className="bar" />
-                                        <span className="bar" />
-                                        <span className="bar" />
-                                    </div>
                                 </div>
                             </nav>
                         </div>

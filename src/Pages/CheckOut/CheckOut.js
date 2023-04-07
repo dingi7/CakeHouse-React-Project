@@ -71,8 +71,8 @@ export const CheckOutPage = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {cart.map((c) => (
-                            <Product key={c.item._id} {...c.item}></Product>
+                        {cart.map((c, index) => (
+                            <Product key={`${c.item._id}-${index}`} {...c.item}></Product>
                         ))}
                     </tbody>
                     <tfoot>

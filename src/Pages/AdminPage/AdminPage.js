@@ -10,10 +10,15 @@ import {
     getAllOrdersReq,
     getAllUsersReq,
 } from '../../utils/request';
-import { errorNotification, successNotification } from '../../utils/notificationHandler';
+import {
+    errorNotification,
+    successNotification,
+} from '../../utils/notificationHandler';
+import { Spinner } from '../../components/Spinner/Spinner';
 
 export const AdminPage = () => {
     const { accessData } = useContext(AuthContext);
+    const [loading, setLoading] = useState(true);
     const [orders, setOrders] = useState([]);
     const [users, setUsers] = useState([]);
     const [productData, setProductData] = useState({
@@ -55,7 +60,7 @@ export const AdminPage = () => {
         try {
             await fulfillOrderPost(id, accessData.accessToken);
             setOrders((state) => state.filter((s) => s._id !== id));
-            successNotification('Order was successfully fulfilled!')
+            successNotification('Order was successfully fulfilled!');
         } catch (err) {
             errorNotification(err.message);
         }
@@ -67,14 +72,13 @@ export const AdminPage = () => {
             setUsers((state) =>
                 state.map((user) =>
                     user._id === id
-                        ? 
-                        {
-                            ...user,
-                            autorization:
-                                user.autorization === 'User'
-                                    ? 'Admin'
-                                    : 'User',
-                        }
+                        ? {
+                              ...user,
+                              autorization:
+                                  user.autorization === 'User'
+                                      ? 'Admin'
+                                      : 'User',
+                          }
                         : user
                 )
             );
@@ -89,8 +93,9 @@ export const AdminPage = () => {
                 const orders = await getAllOrdersReq(accessData.accessToken);
                 setOrders(orders);
 
-                const users = await getAllUsersReq(accessData.accessToken)
-                setUsers(users)
+                const users = await getAllUsersReq(accessData.accessToken);
+                setUsers(users);
+                setLoading(false);
             } catch (err) {
                 errorNotification(err.message);
             }
@@ -111,6 +116,7 @@ export const AdminPage = () => {
                         </tr>
                     </thead>
                     <tbody>
+                        {loading && <Spinner></Spinner>}
                         {users.map((u) => (
                             <User
                                 onUserAuthorization={onUserAuthorization}
@@ -135,17 +141,17 @@ export const AdminPage = () => {
                         </tr>
                     </thead>
                     <tbody>
+                        {loading && <Spinner></Spinner>}
                         {orders.map((o) => (
                             <Order
                                 {...o}
                                 owner={
                                     o.owner
                                         ? o.owner
-                                        : 
-                                        {
-                                            name: o.name,
-                                            phoneNumber: o.phoneNumber,
-                                        }
+                                        : {
+                                              name: o.name,
+                                              phoneNumber: o.phoneNumber,
+                                          }
                                 }
                                 key={o._id}
                                 onOrderFulfill={onOrderFulfill}

@@ -3,7 +3,7 @@ import { Product } from '../components/CartProduct';
 import { getCartFromLocalStorage } from '../utils/shoppingCartUtils';
 
 export const ShoppingCartPage = () => {
-    const {cart, totalPrice} = getCartFromLocalStorage();
+    const { cart, totalPrice } = getCartFromLocalStorage();
     return (
         <div className="containerCart">
             <h1>Shopping Cart</h1>
@@ -20,8 +20,11 @@ export const ShoppingCartPage = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {cart.map((c) => (
-                                <Product key={c.item._id} {...c.item}></Product>
+                            {cart.map((c, index) => (
+                                <Product
+                                    key={`${c.item._id}-${index}`}
+                                    {...c.item}
+                                ></Product>
                             ))}
                         </tbody>
                         <tfoot>
@@ -39,7 +42,9 @@ export const ShoppingCartPage = () => {
                             </tr>
                         </tfoot>
                     </table>
-                    <Link to="/checkout"><button className="btn">Checkout</button></Link>
+                    <Link to="/checkout">
+                        <button className="btn">Checkout</button>
+                    </Link>
                 </>
             )}
         </div>

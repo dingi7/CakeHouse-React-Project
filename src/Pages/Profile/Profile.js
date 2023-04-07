@@ -1,17 +1,27 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../contexts/AuthContext';
 import styles from './profile.module.css';
 import { useNavigate } from 'react-router-dom';
+import {
+    errorNotification,
+    successNotification,
+} from '../../utils/notificationHandler';
+import { updateUser } from '../../utils/request';
 
 export const ProfilePage = () => {
-    const { accessData } = useContext(AuthContext);
+    const { accessData, setAccessData } = useContext(AuthContext);
     const [readOnly, setReadOnly] = useState(true);
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        localStorage.setItem('access_info', JSON.stringify(accessData));
+    }, [accessData]);
 
     const [userData, setUserData] = useState({
         name: accessData.fullName,
         phoneNumber: accessData.phoneNumber,
         email: accessData.email,
+        password: '',
     });
 
     const onFormChangeHandler = (e) => {
@@ -21,17 +31,44 @@ export const ProfilePage = () => {
         }));
     };
 
-    const handleEditButtonClick = () => {
+    const handleEditButtonClick = async () => {
         if (!readOnly) {
-            // send the req
+            try {
+                await updateUser(
+                    accessData._id,
+                    {
+                        email: userData.email,
+                        name: userData.name,
+                        phoneNumber: userData.phoneNumber,
+                        password: userData.password,
+                    },
+                    accessData.accessToken
+                );
+                setAccessData((state) => ({
+                    ...state,
+                    email: userData.email,
+                    name: userData.name,
+                    phoneNumber: userData.phoneNumber,
+                }));
+                successNotification('Your Profile Was Successfully updated!');
+            } catch (err) {
+                errorNotification(err.message);
+                setUserData({
+                    name: accessData.fullName,
+                    phoneNumber: accessData.phoneNumber,
+                    email: accessData.email,
+                    password: '',
+                });
+                setReadOnly(!readOnly);
+            }
         }
         setReadOnly(!readOnly);
     };
 
     const handleViewOrdersButtonClick = (e) => {
-        e.preventDefault()
-        navigate('/orders')
-    }
+        e.preventDefault();
+        navigate('/orders');
+    };
     return (
         <>
             <h1>Profile</h1>
@@ -70,6 +107,19 @@ export const ProfilePage = () => {
                         readOnly={readOnly}
                     />
                 </div>
+                {!readOnly && (
+                    <div className={styles.inputField}>
+                        <label htmlFor="password">Password:</label>
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            defaultValue=""
+                            onChange={onFormChangeHandler}
+                            readOnly={readOnly}
+                        />
+                    </div>
+                )}
                 <div className={styles.inputField}>
                     <label htmlFor="accessRights">Access Rights:</label>
                     <input
@@ -86,7 +136,12 @@ export const ProfilePage = () => {
                     >
                         {readOnly ? 'Edit Profile' : 'Save Changes'}
                     </button>
-                    <button className={styles['button']} onClick={handleViewOrdersButtonClick}>View orders</button>
+                    <button
+                        className={styles['button']}
+                        onClick={handleViewOrdersButtonClick}
+                    >
+                        View orders
+                    </button>
                 </div>
             </div>
         </>

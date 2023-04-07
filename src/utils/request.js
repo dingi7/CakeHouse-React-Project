@@ -11,7 +11,7 @@ const endpoints = {
     fulfill: (id) => `orders/${id}/fulfill`,
     authorize: (id) => `users/authorize/${id}`,
     singleProduct: (id) => `data/catalog/${id}`,
-    
+    updateUser: (id) => `users/${id}`
 };
 
 export const loginReq = async (email, password) => {
@@ -55,4 +55,8 @@ export const getAllUsersReq = async (accessToken) => {
 
 export const sendMessage = async (body) =>{
     return api.post(endpoints.contact, body)
+}
+
+export const updateUser = async (id, body, accessToken) => {
+    return api.put(endpoints.updateUser(id), body, accessToken)
 }

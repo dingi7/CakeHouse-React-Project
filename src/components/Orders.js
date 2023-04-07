@@ -22,7 +22,7 @@ export const Order = ({
                     <Link key={p._id} to={`/shop/${p._id}`}>
                         <img style={{ maxWidth: '500px', maxHeight: '90px' }} src={p.img} alt='img'/>
                     </Link>
-                ))}``
+                ))}
             </td>
             <td>{location}</td>
             <td>Pending</td>
