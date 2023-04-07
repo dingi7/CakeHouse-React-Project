@@ -1,31 +1,70 @@
 
-# Softuni's React JS's final project assigment
+# Softuni's React JS Final Project
 
-Ecommerce React app. 
+Ecommerce React app that allows users to browse products, create and manage accounts, order products, view past orders, and contact the owners. Admins can create new products, view and fulfill orders, and manage user profiles.
 
-## Essential features
+## Essential Features
 
-It gives the user the ability to browse products, make and manage accounts, order products and contact the owners.
+- Browse and order products
+- Create and manage accounts
+- View past orders
+- Contact the owners
+- Admins can create new products, view and fulfill orders, and manage user profiles
 
-Users authenticated as Admin have the ability to create new products, view and fulfill orders, manage users' profiles.
+## Front-End
 
+- React Router for routing
+- React Icons for icons
+- React Animate on Scroll for animations
+- React Toastify for notifications
+- LocalStorage to persist user sessions
+- Protected routes to ensure page safety
 
-## App Deployment
+## Back-End
 
-To deploy the REACT APP run the following commands while in the app's directory
+- Built on Node.js
+- Express for server functionality
+- MongoDB & Mongoose for database
+  
+
+# App Deployment
+
+  ## React App
+
+To deploy the **REACT APP** run the following commands while in the app's directory
+
+  
 
 ```bash
-  npm install
-  npm start
+
+npm install
+
+npm start
+
 ```
+
 The app will be loaded on port 3000 on the local network.
+
 ## Server Deployment
-To deploy the SERVER used to power the back-end of the project run the following commands while in the server's directory
+
+To deploy the **SERVER** used to power the back-end of the project run the following commands while in the server's directory
+
+  
 
 ```bash
-  npm install
-  npm start
+
+npm install
+
+npm start
+
 ```
+
 The server will be loaded on port 3030 on the local network.
 
-NOTE: In order to run the server you will need a MongoDB server running on your machine!
+  
+
+**Note**: In order to run the server you will need a MongoDB server running on your machine!
+
+# 💻 Tech Stack:
+#  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg" alt="html5" width="200" height="200"/>   <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg" alt="react" width="200" height="200"/><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/express/express-original-wordmark.svg" alt="express" width="200" height="200"/><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mongodb/mongodb-original-wordmark.svg" alt="mongoDB" width="200" height="200"/>
+
