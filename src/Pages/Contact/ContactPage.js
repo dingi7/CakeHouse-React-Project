@@ -85,8 +85,8 @@ export const ContactPage = () => {
                     id="message"
                     required
                 />
-                    {loading ? <Spinner/> : "Submit"}
                 <button type="submit" onClick={onFormSubmitHandler}>
+                    {loading ? <Spinner /> : 'Submit'}
                 </button>
             </form>
             <h1>Find us</h1>

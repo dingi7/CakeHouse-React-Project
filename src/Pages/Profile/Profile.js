@@ -7,11 +7,13 @@ import {
     successNotification,
 } from '../../utils/notificationHandler';
 import { updateUser } from '../../utils/request';
+import { Spinner } from '../../components/Spinner/Spinner';
 
 export const ProfilePage = () => {
     const { accessData, setAccessData } = useContext(AuthContext);
     const [readOnly, setReadOnly] = useState(true);
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         localStorage.setItem('access_info', JSON.stringify(accessData));
@@ -33,7 +35,11 @@ export const ProfilePage = () => {
 
     const handleEditButtonClick = async () => {
         if (!readOnly) {
+            setLoading(true);
             try {
+                if(!userData.password){
+                    throw new Error('Incorrect password!')
+                }
                 await updateUser(
                     accessData._id,
                     {
@@ -61,6 +67,7 @@ export const ProfilePage = () => {
                 });
                 setReadOnly(!readOnly);
             }
+            setLoading(false);
         }
         setReadOnly(!readOnly);
     };
@@ -134,7 +141,13 @@ export const ProfilePage = () => {
                         className={styles['button']}
                         onClick={handleEditButtonClick}
                     >
-                        {readOnly ? 'Edit Profile' : 'Save Changes'}
+                        {loading ? (
+                            <Spinner></Spinner>
+                        ) : readOnly ? (
+                            'Edit Profile'
+                        ) : (
+                            'Save Changes'
+                        )}
                     </button>
                     <button
                         className={styles['button']}

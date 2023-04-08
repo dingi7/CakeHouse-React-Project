@@ -1,4 +1,4 @@
-const host = 'http://web-server-ten.vercel.app/'
+const host = 'https://web-server-ten.vercel.app/'
 // const host = 'http://localhost:3030/'
 
 const request = async (method, url, data, accessToken) => {
