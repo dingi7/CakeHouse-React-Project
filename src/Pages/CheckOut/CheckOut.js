@@ -10,12 +10,14 @@ import { AuthContext } from '../../contexts/AuthContext';
 import { orderPost } from '../../utils/request';
 import { errorNotification } from '../../utils/notificationHandler';
 import { Thanks } from '../Thanks/Thanks';
+import { Spinner } from '../../components/Spinner/Spinner';
 
 export const CheckOutPage = () => {
     const { accessData } = useContext(AuthContext);
     const { cart, totalPrice } = getCartFromLocalStorage();
     const [isOrderPlaced, setIsOrderPlaced] = useState(false);
     const [orderId, setOrderId] = useState('');
+    const [loading, setLoading] = useState(false);
 
     const [orderData, setOrderData] = useState({
         deliveryMethod: 'pickup',
@@ -35,6 +37,7 @@ export const CheckOutPage = () => {
 
     const onCheckOut = async (e) => {
         e.preventDefault();
+        setLoading(true);
         let products = [];
         cart.map((c) => products.push(c.item.id));
         const body = {
@@ -50,13 +53,17 @@ export const CheckOutPage = () => {
             phoneNumber: orderData.phoneNumber,
         };
         try {
-            const data = await orderPost(accessData ? accessData.accessToken : null , body);
+            const data = await orderPost(
+                accessData ? accessData.accessToken : null,
+                body
+            );
             clearShoppingCart();
             setIsOrderPlaced(true);
             setOrderId(data._id);
         } catch (err) {
             errorNotification(err.message);
         }
+        setLoading(false);
     };
     if (totalPrice > 5 && !isOrderPlaced) {
         return (
@@ -72,7 +79,10 @@ export const CheckOutPage = () => {
                     </thead>
                     <tbody>
                         {cart.map((c, index) => (
-                            <Product key={`${c.item._id}-${index}`} {...c.item}></Product>
+                            <Product
+                                key={`${c.item._id}-${index}`}
+                                {...c.item}
+                            ></Product>
                         ))}
                     </tbody>
                     <tfoot>
@@ -190,7 +200,7 @@ export const CheckOutPage = () => {
                         className={styles.placeOrderButton}
                         onClick={onCheckOut}
                     >
-                        Place Order
+                        {loading ? <Spinner /> : 'Place Order'}
                     </button>
                 </div>
             </>

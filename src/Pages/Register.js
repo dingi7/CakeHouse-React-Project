@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext';
 import { registerReq } from '../utils/request';
 import { errorNotification } from '../utils/notificationHandler';
+import { Spinner } from '../components/Spinner/Spinner';
 
 export const RegisterPage = () => {
     const { setAccessData } = useContext(AuthContext);
@@ -12,6 +13,7 @@ export const RegisterPage = () => {
         phoneNumber: '',
         password: '',
     });
+    const [loading, setLoading] = useState(false);
 
     const onFormChangeHandler = (e) => {
         setUserData((state) => ({ ...state, [e.target.name]: e.target.value }));
@@ -19,6 +21,7 @@ export const RegisterPage = () => {
     const navigate = useNavigate();
     const onFormSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
         try {
             const data = await registerReq(
                 userData.email,
@@ -32,6 +35,7 @@ export const RegisterPage = () => {
         } catch (err) {
             errorNotification(err.message);
         }
+        setLoading(false);
     };
 
     return (
@@ -76,7 +80,7 @@ export const RegisterPage = () => {
                         className="btn"
                         onClick={onFormSubmit}
                     >
-                        Register
+                        {loading ? <Spinner/> : "Register"}
                     </button>
                 </form>
                 <p>

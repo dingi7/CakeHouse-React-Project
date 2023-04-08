@@ -8,6 +8,7 @@ const endpoints = {
     userOrders: 'orders/user',
     orders: 'orders',
     contact: 'contact',
+    statistics: 'orders/statistics',
     fulfill: (id) => `orders/${id}/fulfill`,
     authorize: (id) => `users/authorize/${id}`,
     singleProduct: (id) => `data/catalog/${id}`,
@@ -59,4 +60,8 @@ export const sendMessage = async (body) =>{
 
 export const updateUser = async (id, body, accessToken) => {
     return api.put(endpoints.updateUser(id), body, accessToken)
+}
+
+export const getOrderStatistics = async (accessToken) => {
+    return api.get(endpoints.statistics, null, accessToken);
 }

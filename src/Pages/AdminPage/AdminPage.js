@@ -9,6 +9,7 @@ import {
     fulfillOrderPost,
     getAllOrdersReq,
     getAllUsersReq,
+    getOrderStatistics,
 } from '../../utils/request';
 import {
     errorNotification,
@@ -18,9 +19,10 @@ import { Spinner } from '../../components/Spinner/Spinner';
 
 export const AdminPage = () => {
     const { accessData } = useContext(AuthContext);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [orders, setOrders] = useState([]);
     const [users, setUsers] = useState([]);
+    const [statistics, setStatistics] = useState({});
     const [productData, setProductData] = useState({
         name: '',
         description: '',
@@ -95,6 +97,9 @@ export const AdminPage = () => {
 
                 const users = await getAllUsersReq(accessData.accessToken);
                 setUsers(users);
+
+                const stats = await getOrderStatistics(accessData.accessToken);
+                setStatistics(stats);
                 setLoading(false);
             } catch (err) {
                 errorNotification(err.message);
@@ -106,6 +111,7 @@ export const AdminPage = () => {
         <div className={styles['admin-page-container']}>
             <div className={styles['user-list']}>
                 <h2>Registered Users</h2>
+                {users.length === 0 && <Spinner></Spinner>}
                 <table>
                     <thead>
                         <tr>
@@ -127,38 +133,86 @@ export const AdminPage = () => {
                     </tbody>
                 </table>
             </div>
-            <div className={styles['order-list']}>
-                <h2>Orders</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Buyer</th>
-                            <th>Total</th>
-                            <th>Ordered Products</th>
-                            <th>Delivery</th>
-                            <th>Status</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {loading && <Spinner></Spinner>}
-                        {orders.map((o) => (
-                            <Order
-                                {...o}
-                                owner={
-                                    o.owner
-                                        ? o.owner
-                                        : {
-                                              name: o.name,
-                                              phoneNumber: o.phoneNumber,
-                                          }
-                                }
-                                key={o._id}
-                                onOrderFulfill={onOrderFulfill}
-                            ></Order>
-                        ))}
-                    </tbody>
-                </table>
+            <div
+                className={styles['order-list']}
+                style={{ textAlign: 'center' }}
+            >
+                <h2
+                    style={{
+                        marginBottom: '0.1em',
+                    }}
+                >
+                    Orders
+                </h2>
+                {statistics.totalSales ? (
+                    <div style={{ textAlign: 'center' }}>
+                            <p
+                                style={{
+                                    marginBottom: '0.3em',
+                                    marginTop: '0.3em',
+                                }}
+                            >
+                                Total Sales: {statistics.totalSales.toFixed(2)}
+                                лв
+                            </p>
+                            <p
+                                style={{
+                                    marginBottom: '0.3em',
+                                    marginTop: '0.3em',
+                                }}
+                            >
+                                Sales For The Week:{' '}
+                                {statistics.salesForTheWeek.toFixed(2)}лв
+                            </p>
+                            <p
+                                style={{
+                                    marginBottom: '0.3em',
+                                    marginTop: '0.3em',
+                                }}
+                            >
+                                Best Selling Cake: "
+                                {statistics.bestSellingProduct.name}" Sold:{' '}
+                                {statistics.bestSellingProduct.sales} Time/s
+                            </p>
+                    </div>
+                ) : (
+                    <Spinner></Spinner>
+                )}
+
+                {orders.length > 0 ? (
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Buyer</th>
+                                <th>Total</th>
+                                <th>Ordered Products</th>
+                                <th>Delivery</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {loading && <Spinner></Spinner>}
+                            {orders.map((o) => (
+                                <Order
+                                    {...o}
+                                    owner={
+                                        o.owner
+                                            ? o.owner
+                                            : {
+                                                  name: o.name,
+                                                  phoneNumber: o.phoneNumber,
+                                              }
+                                    }
+                                    key={o._id}
+                                    onOrderFulfill={onOrderFulfill}
+                                ></Order>
+                            ))}
+                        </tbody>
+                    </table>
+                ) : (
+                    <h3>There are no orders yet.</h3>
+                )}
             </div>
             <div className={styles['add-product-form']}>
                 <h2>Add New Product</h2>

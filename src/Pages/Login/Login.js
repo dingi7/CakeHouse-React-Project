@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext';
 import { loginReq } from '../../utils/request';
 import { errorNotification } from '../../utils/notificationHandler';
+import { Spinner } from '../../components/Spinner/Spinner';
 
 export const LoginPage = () => {
     const { setAccessData } = useContext(AuthContext);
@@ -10,6 +11,7 @@ export const LoginPage = () => {
         email: '',
         password: '',
     });
+    const [loading, setLoading] = useState(false);
 
     const onFormChangeHandler = (e) => {
         setUserData((state) => ({ ...state, [e.target.name]: e.target.value }));
@@ -18,6 +20,7 @@ export const LoginPage = () => {
 
     const onFormSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
         try {
             const data = await loginReq(userData.email, userData.password);
             setAccessData(data);
@@ -26,6 +29,7 @@ export const LoginPage = () => {
         } catch (err) {
             errorNotification(err.message);
         }
+        setLoading(false);
     };
 
     return (
@@ -55,7 +59,7 @@ export const LoginPage = () => {
                         className="btn"
                         onClick={onFormSubmit}
                     >
-                        Login
+                        {loading ? <Spinner/> : "Login"}
                     </button>
                 </form>
                 <p>

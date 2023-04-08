@@ -6,6 +6,7 @@ import {
     successNotification,
 } from '../../utils/notificationHandler';
 import { sendMessage } from '../../utils/request';
+import { Spinner } from '../../components/Spinner/Spinner';
 
 export const ContactPage = () => {
     const [userData, setUserData] = useState({
@@ -13,6 +14,7 @@ export const ContactPage = () => {
         email: '',
         message: '',
     });
+    const [loading, setLoading] = useState(false);
 
     const onFormChangeHandler = (e) => {
         setUserData((state) => ({ ...state, [e.target.name]: e.target.value }));
@@ -20,6 +22,7 @@ export const ContactPage = () => {
 
     const onFormSubmitHandler = async (e) => {
         e.preventDefault();
+        setLoading(true);
         try {
             await sendMessage({
                 name: userData.name,
@@ -35,6 +38,7 @@ export const ContactPage = () => {
         } catch (err) {
             errorNotification(err.message);
         }
+        setLoading(false);
     };
     return (
         <div className={styles.container}>
@@ -81,8 +85,8 @@ export const ContactPage = () => {
                     id="message"
                     required
                 />
+                    {loading ? <Spinner/> : "Submit"}
                 <button type="submit" onClick={onFormSubmitHandler}>
-                    Submit
                 </button>
             </form>
             <h1>Find us</h1>
