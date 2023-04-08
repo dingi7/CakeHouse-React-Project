@@ -1,7 +1,7 @@
 
 # Softuni's React JS Final Project
 
-Ecommerce React app that allows users to browse products, create and manage accounts, order products, view past orders, and contact the owners. Admins can create new products, view and fulfill orders, and manage user profiles.
+Ecommerce React app that allows users to browse products, create and manage accounts, order products, view past orders, and contact the owners. Admins can create new products, view and fulfill orders, and manage user profiles. Admins can also view statistics such as best selling cakes, total sales, and sales for the week.
 
 ## Essential Features
 
@@ -9,7 +9,7 @@ Ecommerce React app that allows users to browse products, create and manage acco
 - Create and manage accounts
 - View past orders
 - Contact the owners
-- Admins can create new products, view and fulfill orders, and manage user profiles
+- Admins can create new products, view and fulfill orders, manage user profiles, and view statistics
 
 ## Front-End
 
@@ -29,25 +29,13 @@ Ecommerce React app that allows users to browse products, create and manage acco
 
 # App Deployment
 
-  ## React App
 
-To deploy the **REACT APP** run the following commands while in the app's directory
+Both the **React App** and the **Server** are deployed on **Vercel** and can be accessed through the following links:
 
-  
+    React App: https://cake-house-dingi7.vercel.app
+    Server: https://web-server-ten.vercel.app
 
-```bash
-
-npm install
-
-npm start
-
-```
-
-The app will be loaded on port 3000 on the local network.
-
-## Server Deployment
-
-To deploy the **SERVER** used to power the back-end of the project run the following commands while in the server's directory
+To deploy the **REACT APP** and **SERVER** locally, run the following commands while in their respective directories:
 
   
 
@@ -59,8 +47,7 @@ npm start
 
 ```
 
-The server will be loaded on port 3030 on the local network.
-
+The React app will be loaded on port 3000 on the local network, while the server will be loaded on port 3030.
   
 
 **Note**: In order to run the server you will need a MongoDB server running on your machine!
