@@ -29,11 +29,11 @@ Ecommerce React app that allows users to browse products, create and manage acco
 
 # App Deployment
 
-  ## React App
+
 Both the **React App** and the **Server** are deployed on **Vercel** and can be accessed through the following links:
 
-    React App: https://my-react-app.vercel.app/
-    Server: https://my-server.vercel.app/
+    React App: [https://my-react-app.vercel.app/](https://cake-house-dingi7.vercel.app)
+    Server: [https://my-server.vercel.app/](https://web-server-ten.vercel.app/)
 
 To deploy the **REACT APP** and **SERVER** locally, run the following commands while in their respective directories:
 
