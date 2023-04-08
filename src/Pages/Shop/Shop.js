@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { Cake } from '../components/Cake';
-import { getProductsReq } from '../utils/request';
-import { errorNotification } from '../utils/notificationHandler';
+import { Cake } from '../../components/Cake';
+import { getProductsReq } from '../../utils/request';
+import { errorNotification } from '../../utils/notificationHandler';
 
 export const ShopPage = () => {
     const [cakes, setCakes] = useState([]);

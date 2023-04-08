@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { errorNotification, successNotification } from '../utils/notificationHandler';
-import { getSingleProductReq } from '../utils/request';
+import { errorNotification, successNotification } from '../../utils/notificationHandler';
+import { getSingleProductReq } from '../../utils/request';
 
 export const SingleProductPage = () => {
     const navigate = useNavigate();

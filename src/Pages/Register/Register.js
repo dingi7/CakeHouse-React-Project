@@ -1,9 +1,9 @@
 import { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { AuthContext } from '../contexts/AuthContext';
-import { registerReq } from '../utils/request';
-import { errorNotification } from '../utils/notificationHandler';
-import { Spinner } from '../components/Spinner/Spinner';
+import { AuthContext } from '../../contexts/AuthContext';
+import { registerReq } from '../../utils/request';
+import { errorNotification } from '../../utils/notificationHandler';
+import { Spinner } from '../../components/Spinner/Spinner';
 
 export const RegisterPage = () => {
     const { setAccessData } = useContext(AuthContext);

@@ -131,18 +131,18 @@ button {
 }
 
 .pattern-overlay {
-    background-image: url(/public/images/pattern1.png);
+    background-image: url(/src/assets/pattern1.png);
     background-repeat: no-repeat;
     background-position: top right;
 }
 
 .leaf-pattern-overlay {
-    background-image: url(/public/images/leaf.png);
+    background-image: url(/src/assets/leaf.png);
     background-repeat: no-repeat;
     background-position: bottom left;
 }
 .corner-pattern-overlay {
-    background-image: url(/public/images/pattern2.png);
+    background-image: url(/src/assets/pattern2.png);
     background-repeat: no-repeat;
     background-position: top right;
 }

@@ -65,3 +65,7 @@ export const updateUser = async (id, body, accessToken) => {
 export const getOrderStatistics = async (accessToken) => {
     return api.get(endpoints.statistics, null, accessToken);
 }
+
+export const logout = async (accessToken) => {
+    return api.get(endpoints.logout, null, accessToken)
+}

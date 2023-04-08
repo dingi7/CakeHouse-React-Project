@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import { Product } from '../components/CartProduct';
-import { getCartFromLocalStorage } from '../utils/shoppingCartUtils';
+import { Product } from '../../components/CartProduct';
+import { getCartFromLocalStorage } from '../../utils/shoppingCartUtils';
 
 export const ShoppingCartPage = () => {
     const { cart, totalPrice } = getCartFromLocalStorage();
