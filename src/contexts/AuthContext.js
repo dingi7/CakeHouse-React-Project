@@ -12,7 +12,7 @@ export function AuthProvider(props) {
                 setAccessData(parsedAccessData);
             } catch (error) {
                 console.error('Failed to parse access token:', error);
-                localStorage.setItem('access_info', {});
+                localStorage.setItem('access_info', JSON.stringify({}));
             }
         }
     }, []);

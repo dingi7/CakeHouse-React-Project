@@ -128,6 +128,7 @@ export const CheckOutPage = () => {
                                 <input
                                     type="text"
                                     id="address"
+                                    name="address"
                                     value={orderData.address}
                                     onChange={onFormChangeHandler}
                                 />

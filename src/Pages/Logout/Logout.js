@@ -14,7 +14,7 @@ export const Logout = () => {
     useEffect(() => {
         const logoutReqs = async () => {
             try {
-                await logout(accessData.accessToken)
+                await logout(accessData.accessToken);
                 setAccessData(null);
                 localStorage.removeItem('access_info');
                 navigate('/login');
@@ -23,7 +23,7 @@ export const Logout = () => {
                 errorNotification(err.message);
             }
         };
-        logoutReqs()
+        logoutReqs();
     }, [setAccessData, navigate, accessData.accessToken]);
 
     return null;

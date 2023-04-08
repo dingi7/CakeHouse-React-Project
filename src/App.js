@@ -17,8 +17,24 @@ import { Logout } from './Pages/Logout/Logout';
 import { About } from './Pages/About/About';
 import { Orders } from './Pages/Orders/Orders';
 import { ContactPage } from './Pages/Contact/ContactPage';
+import { MobileHeader } from './Layouts/MobileHeader';
+import { useEffect, useState } from 'react';
 
 function App() {
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        function handleResize() {
+            setIsMobile(window.innerWidth <= 768);
+        }
+
+        window.addEventListener('resize', handleResize);
+        handleResize();
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
     return (
         <BrowserRouter>
             <ToastContainer
@@ -33,7 +49,7 @@ function App() {
                 pauseOnHover
                 theme="colored"
             />
-            <Header></Header>
+            {isMobile ? <MobileHeader /> : <Header />}
             <Routes>
                 <Route path="*" element={<h1 className="page-title">404</h1>} />
                 <Route path="/about" element={<About />} />

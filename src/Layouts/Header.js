@@ -1,7 +1,7 @@
 import { Link, NavLink } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../contexts/AuthContext';
-import './Header.css'
+import './Header.css';
 // import { AuthContext } from '../../contexts/AuthContext';
 
 export const Header = () => {
@@ -173,6 +173,7 @@ export const Header = () => {
                                         </li>
                                     </ul>
                                 </div>
+                                
                             </nav>
                         </div>
                     </div>

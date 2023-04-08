@@ -67,5 +67,5 @@ export const getOrderStatistics = async (accessToken) => {
 }
 
 export const logout = async (accessToken) => {
-    return api.get(endpoints.logout, null, accessToken)
+    api.get(endpoints.logout, null, accessToken)
 }
