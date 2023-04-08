@@ -1,7 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { errorNotification, successNotification } from '../../utils/notificationHandler';
+import {
+    errorNotification,
+    successNotification,
+} from '../../utils/notificationHandler';
 import { getSingleProductReq } from '../../utils/request';
+import styles from './Cake.module.css';
 
 export const SingleProductPage = () => {
     const navigate = useNavigate();
@@ -37,37 +41,38 @@ export const SingleProductPage = () => {
         const updatedCart = [...cart, { item }];
         setCart(updatedCart);
         saveCartToLocalStorage(updatedCart);
-        successNotification('Item successfuly added to your shopping cart!')
+        successNotification('Item successfuly added to your shopping cart!');
     };
     return (
-        <>
-            <section className="bg-sand padding-large">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-md-6">
-                            <img src={cake.img} alt="banner" />
-                        </div>
-                        <div className="col-md-6 pl-5">
-                            <div className="product-detail">
-                                <h1>{cake.name}</h1>
-                                <p>Cake House</p>
-                                <span>{cake.description}</span>
-                                <p className="price colored">
-                                    {cake.price}.00лв
-                                </p>
-                                <button
-                                    type="submit"
-                                    name="add-to-cart"
-                                    className="button"
-                                    onClick={addToCart}
-                                >
-                                    Add to cart
-                                </button>
-                            </div>
+        <section className={`${styles.paddingLarge}`}>
+            <div className={`${styles.container}`}>
+                <div className={`${styles.row}`}>
+                    <div className={`col-md-6 ${styles.col}`}>
+                        <img
+                            src={cake.img}
+                            alt="banner"
+                            className={styles.image}
+                        />
+                    </div>
+                    <div className={`col-md-6 pl-5 ${styles.col}`}>
+                        <div className={styles.productDetail}>
+                            <h1>{cake.name}</h1>
+                            <p>Cake House</p>
+                            <span>{cake.description}</span>
+                            <p className={`${styles.price}`}>
+                                {cake.price.toFixed(2)}лв
+                            </p>
+                            <button
+                                type="submit"
+                                name="add-to-cart"
+                                onClick={addToCart}
+                            >
+                                Add to cart
+                            </button>
                         </div>
                     </div>
                 </div>
-            </section>
-        </>
+            </div>
+        </section>
     );
 };

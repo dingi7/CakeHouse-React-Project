@@ -12,6 +12,7 @@ export const RegisterPage = () => {
         name: '',
         phoneNumber: '',
         password: '',
+        rePassword: '',
     });
     const [loading, setLoading] = useState(false);
 
@@ -23,6 +24,9 @@ export const RegisterPage = () => {
         e.preventDefault();
         setLoading(true);
         try {
+            if(userData.password !== userData.rePassword){
+                throw new Error('Passwords don\'t match!')
+            }
             const data = await registerReq(
                 userData.email,
                 userData.name,
@@ -75,12 +79,20 @@ export const RegisterPage = () => {
                         value={userData.password}
                         onChange={onFormChangeHandler}
                     />
+                    <label htmlFor="rePassword">Repeat Password</label>
+                    <input
+                        type="password"
+                        id="rePassword"
+                        name="rePassword"
+                        value={userData.rePassword}
+                        onChange={onFormChangeHandler}
+                    />
                     <button
                         type="submit"
                         className="btn"
                         onClick={onFormSubmit}
                     >
-                        {loading ? <Spinner/> : "Register"}
+                        {loading ? <Spinner /> : 'Register'}
                     </button>
                 </form>
                 <p>

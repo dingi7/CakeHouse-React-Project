@@ -19,7 +19,8 @@ import { Spinner } from '../../components/Spinner/Spinner';
 
 export const AdminPage = () => {
     const { accessData } = useContext(AuthContext);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
+    const [isButtonLoading, setIsButtonLoading] = useState(false)
     const [orders, setOrders] = useState([]);
     const [users, setUsers] = useState([]);
     const [statistics, setStatistics] = useState({});
@@ -59,6 +60,7 @@ export const AdminPage = () => {
     };
 
     const onOrderFulfill = async (id) => {
+        setIsButtonLoading(true)
         try {
             await fulfillOrderPost(id, accessData.accessToken);
             setOrders((state) => state.filter((s) => s._id !== id));
@@ -66,9 +68,11 @@ export const AdminPage = () => {
         } catch (err) {
             errorNotification(err.message);
         }
+        setIsButtonLoading(false)
     };
 
     const onUserAuthorization = async (id) => {
+        setIsButtonLoading(true)
         try {
             await authorizeUserPost(id, accessData.accessToken);
             setUsers((state) =>
@@ -87,6 +91,7 @@ export const AdminPage = () => {
         } catch (err) {
             errorNotification(err.message);
         }
+        setIsButtonLoading(false)
     };
 
     useEffect(() => {
@@ -127,6 +132,7 @@ export const AdminPage = () => {
                             <User
                                 onUserAuthorization={onUserAuthorization}
                                 key={u._id}
+                                isButtonLoading={isButtonLoading}
                                 {...u}
                             ></User>
                         ))}
@@ -206,6 +212,7 @@ export const AdminPage = () => {
                                     }
                                     key={o._id}
                                     onOrderFulfill={onOrderFulfill}
+                                    isButtonLoading={isButtonLoading}
                                 ></Order>
                             ))}
                         </tbody>

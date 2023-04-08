@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { Spinner } from './Spinner/Spinner';
 
 export const Order = ({
     _id,
@@ -7,6 +8,7 @@ export const Order = ({
     products,
     owner,
     onOrderFulfill,
+    isButtonLoading,
 }) => {
     return (
         <tr>
@@ -20,14 +22,21 @@ export const Order = ({
             <td>
                 {products.map((p) => (
                     <Link key={p._id} to={`/shop/${p._id}`}>
-                        <img style={{ maxWidth: '500px', maxHeight: '90px' }} src={p.img} alt='img'/>
+                        <img
+                            style={{ maxWidth: '500px', maxHeight: '90px' }}
+                            src={p.img}
+                            alt="img"
+                        />
                     </Link>
                 ))}
             </td>
             <td>{location}</td>
             <td>Pending</td>
             <td>
-                <button onClick={() => onOrderFulfill(_id)}>Fulfill</button>
+                <button onClick={() => onOrderFulfill(_id)}>
+                    {' '}
+                    {isButtonLoading ? <Spinner></Spinner> : 'Fulfill'}
+                </button>
             </td>
         </tr>
     );

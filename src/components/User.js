@@ -1,9 +1,12 @@
+import { Spinner } from "./Spinner/Spinner";
+
 export const User = ({
     name,
     _id,
     autorization,
     email,
     onUserAuthorization,
+    isButtonLoading,
 }) => {
     return (
         <tr>
@@ -12,7 +15,13 @@ export const User = ({
             <td>{autorization}</td>
             <td>
                 <button onClick={() => onUserAuthorization(_id)}>
-                    {autorization === 'User' ? 'Make admin' : 'Make user'}
+                    {isButtonLoading ? (
+                        <Spinner></Spinner>
+                    ) : autorization === 'User' ? (
+                        'Make admin'
+                    ) : (
+                        'Make user'
+                    )}
                 </button>
             </td>
         </tr>

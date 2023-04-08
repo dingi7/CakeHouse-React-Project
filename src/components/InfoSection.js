@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 export const InfoSection = () => {
     return (
         <section id="billboard">
@@ -15,13 +17,13 @@ export const InfoSection = () => {
                                         house and for delivery.
                                     </p>
                                     <div className="btn-wrap">
-                                        <a
-                                            href="/"
+                                        <Link
+                                            to="/about"
                                             className="btn btn-outline-accent btn-accent-arrow"
                                         >
                                             Read More
                                             <i className="icon icon-ns-arrow-right" />
-                                        </a>
+                                        </Link>
                                     </div>
                                 </div>
                                 {/*banner-content*/}

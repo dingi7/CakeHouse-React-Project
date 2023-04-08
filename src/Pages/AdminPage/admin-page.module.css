@@ -93,3 +93,26 @@
 .admin-page-container button:hover {
     background-color: #b39781;
 }
+
+/* Media queries for mobile devices */
+@media screen and (max-width: 768px) {
+    .admin-page-container {
+        flex-wrap: wrap;
+    }
+
+    .user-list,
+    .order-list,
+    .add-product-form {
+        flex-basis: 100%;
+        margin: 0;
+    }
+
+    .user-list,
+    .order-list {
+        margin-top: 20px;
+    }
+
+    .add-product-form {
+        margin-top: 40px;
+    }
+}
