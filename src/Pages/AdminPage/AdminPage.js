@@ -46,6 +46,9 @@ export const AdminPage = () => {
             img: productData.img,
         };
         try {
+            if(!productData.name || !productData.description || !productData.price || !productData.img){
+                throw new Error('All fields are required!')
+            }
             await createProductPost(accessData.accessToken, body);
             successNotification('Product was successfuly created!');
             setProductData({

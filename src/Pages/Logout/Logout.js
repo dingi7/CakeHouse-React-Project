@@ -6,6 +6,7 @@ import {
     successNotification,
 } from '../../utils/notificationHandler';
 import { logout } from '../../utils/request';
+import { clearShoppingCart } from '../../utils/shoppingCartUtils';
 
 export const Logout = () => {
     const { setAccessData, accessData } = useContext(AuthContext);
@@ -17,6 +18,7 @@ export const Logout = () => {
                 await logout(accessData.accessToken);
                 setAccessData(null);
                 localStorage.removeItem('access_info');
+                clearShoppingCart()
                 navigate('/login');
                 successNotification('Successfully logged out!');
             } catch (err) {
