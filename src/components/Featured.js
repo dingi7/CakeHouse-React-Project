@@ -25,9 +25,9 @@ export const Featured = () => {
                     <div className="col-md-12">
                         <div className="section-header align-center">
                             <div className="title">
-                                <span>Some quality items</span>
+                                <span>Сладки предложения</span>
                             </div>
-                            <h2 className="section-title">Featured Sweets</h2>
+                            <h2 className="section-title">Препоръчани</h2>
                         </div>
                         <div className="product-list" data-aos="">
                             <div className="row">
@@ -47,7 +47,7 @@ export const Featured = () => {
                     <div className="col-md-12">
                         <div className="btn-wrap align-right">
                             <Link to="/shop" className="btn-accent-arrow">
-                                View all products{' '}
+                                Вижте всички продукти{' '}
                                 <i className="icon icon-ns-arrow-right" />
                             </Link>
                         </div>

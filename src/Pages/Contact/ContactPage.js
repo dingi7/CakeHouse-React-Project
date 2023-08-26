@@ -42,24 +42,23 @@ export const ContactPage = () => {
     };
     return (
         <div className={styles.container}>
-            <h1>We'd love to hear from you</h1>
+            <h1>Ще се радваме да се свържете с нас!</h1>
             <div className={styles.info}>
                 <p>
-                    Whether you're curious about our products, custom orders or
-                    even business hours, we're ready to answer.
+                    Независимо дали сте любопитни относно нашите продукти, интересувате се от персонализирани поръчки или имате въпроси относно работното ни време, ние сме готови да Ви отговорим.
                 </p>
 
-                <h2>Call us</h2>
+                <h2>Обадете ни се</h2>
                 <p>
-                    <strong>Phone:</strong> +359 999888777
+                    <strong>Телефон:</strong> +359 887933893
                     <br></br>
-                    <strong>Address:</strong> 123 Main St, Sliven, Bulgaria
+                    <strong>Адрес:</strong> Сава Доброплодни 11
                 </p>
 
-                <h2>Or leave us a message</h2>
+                <h2>Или ни изпратете съобщение</h2>
             </div>
             <form className={styles.form}>
-                <label htmlFor="name">Name:</label>
+                <label htmlFor="name">Име:</label>
                 <input
                     name="name"
                     value={userData.name}
@@ -77,7 +76,7 @@ export const ContactPage = () => {
                     id="email"
                     required
                 />
-                <label htmlFor="message">Message:</label>
+                <label htmlFor="message">Съобщение:</label>
                 <textarea
                     name="message"
                     value={userData.message}
@@ -86,13 +85,13 @@ export const ContactPage = () => {
                     required
                 />
                 <button type="submit" onClick={onFormSubmitHandler}>
-                    {loading ? <Spinner /> : 'Submit'}
+                    {loading ? <Spinner /> : 'Изпрати'}
                 </button>
             </form>
-            <h1>Find us</h1>
+            {/* <h1>Намерете ни</h1>
             <div id="map" className={styles.map}>
                 <GoogleMaps></GoogleMaps>
-            </div>
+            </div> */}
         </div>
     );
 };

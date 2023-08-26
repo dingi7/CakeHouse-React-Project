@@ -21,7 +21,7 @@ export const InfoSection = () => {
                                             to="/about"
                                             className="btn btn-outline-accent btn-accent-arrow"
                                         >
-                                            Read More
+                                            Прочети повече
                                             <i className="icon icon-ns-arrow-right" />
                                         </Link>
                                     </div>
