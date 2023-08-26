@@ -46,7 +46,7 @@ export const AdminPage = () => {
             img: productData.img,
         };
         try {
-            if(!productData.name || !productData.description || !productData.price || !productData.img){
+            if (!productData.name || !productData.description || !productData.price || !productData.img) {
                 throw new Error('All fields are required!')
             }
             await createProductPost(accessData.accessToken, body);
@@ -82,12 +82,12 @@ export const AdminPage = () => {
                 state.map((user) =>
                     user._id === id
                         ? {
-                              ...user,
-                              autorization:
-                                  user.autorization === 'User'
-                                      ? 'Admin'
-                                      : 'User',
-                          }
+                            ...user,
+                            autorization:
+                                user.autorization === 'User'
+                                    ? 'Admin'
+                                    : 'User',
+                        }
                         : user
                 )
             );
@@ -101,32 +101,33 @@ export const AdminPage = () => {
         const fetchData = async () => {
             try {
                 const orders = await getAllOrdersReq(accessData.accessToken);
-                setOrders(orders);
+                setOrders(orders || []);
 
                 const users = await getAllUsersReq(accessData.accessToken);
                 setUsers(users);
 
                 const stats = await getOrderStatistics(accessData.accessToken);
                 setStatistics(stats);
-                setLoading(false);
+                
             } catch (err) {
                 errorNotification(err.message);
             }
+            setLoading(false);
         };
         fetchData();
     }, [accessData.accessToken]);
     return (
         <div className={styles['admin-page-container']}>
             <div className={styles['user-list']}>
-                <h2>Registered Users</h2>
+                <h2>Регистрирани потребители:</h2>
                 {users.length === 0 && <Spinner></Spinner>}
                 <table>
                     <thead>
                         <tr>
-                            <th>Name</th>
+                            <th>Име</th>
                             <th>Email</th>
-                            <th>Role</th>
-                            <th>Action</th>
+                            <th>Роля</th>
+                            <th>Действия</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -151,38 +152,38 @@ export const AdminPage = () => {
                         marginBottom: '0.1em',
                     }}
                 >
-                    Orders
+                    Поръчки
                 </h2>
                 {statistics.totalSales ? (
                     <div style={{ textAlign: 'center' }}>
-                            <p
-                                style={{
-                                    marginBottom: '0.3em',
-                                    marginTop: '0.3em',
-                                }}
-                            >
-                                Total Sales: {statistics.totalSales.toFixed(2)}
-                                лв
-                            </p>
-                            <p
-                                style={{
-                                    marginBottom: '0.3em',
-                                    marginTop: '0.3em',
-                                }}
-                            >
-                                Sales For The Week:{' '}
-                                {statistics.salesForTheWeek.toFixed(2)}лв
-                            </p>
-                            <p
-                                style={{
-                                    marginBottom: '0.3em',
-                                    marginTop: '0.3em',
-                                }}
-                            >
-                                Best Selling Cake: "
-                                {statistics.bestSellingProduct.name}" Sold:{' '}
-                                {statistics.bestSellingProduct.sales} Time/s
-                            </p>
+                        <p
+                            style={{
+                                marginBottom: '0.3em',
+                                marginTop: '0.3em',
+                            }}
+                        >
+                            Всички продажби: {statistics.totalSales.toFixed(2)}
+                            лв
+                        </p>
+                        <p
+                            style={{
+                                marginBottom: '0.3em',
+                                marginTop: '0.3em',
+                            }}
+                        >
+                            Продажби за седмицата:{' '}
+                            {statistics.salesForTheWeek.toFixed(2)}лв
+                        </p>
+                        <p
+                            style={{
+                                marginBottom: '0.3em',
+                                marginTop: '0.3em',
+                            }}
+                        >
+                            Най-продавана торта: "
+                            {statistics.bestSellingProduct.name}" Продадена:{' '}
+                            {statistics.bestSellingProduct.sales} Пъти
+                        </p>
                     </div>
                 ) : (
                     <Spinner></Spinner>
@@ -192,12 +193,12 @@ export const AdminPage = () => {
                     <table>
                         <thead>
                             <tr>
-                                <th>Buyer</th>
-                                <th>Total</th>
-                                <th>Ordered Products</th>
-                                <th>Delivery</th>
-                                <th>Status</th>
-                                <th>Action</th>
+                                <th>Купувач</th>
+                                <th>Сума</th>
+                                <th>Поръчка</th>
+                                <th>Доставка</th>
+                                <th>Статус</th>
+                                <th>Действия</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -209,9 +210,9 @@ export const AdminPage = () => {
                                         o.owner
                                             ? o.owner
                                             : {
-                                                  name: o.name,
-                                                  phoneNumber: o.phoneNumber,
-                                              }
+                                                name: o.name,
+                                                phoneNumber: o.phoneNumber,
+                                            }
                                     }
                                     key={o._id}
                                     onOrderFulfill={onOrderFulfill}
@@ -221,14 +222,14 @@ export const AdminPage = () => {
                         </tbody>
                     </table>
                 ) : (
-                    <h3>There are no orders yet.</h3>
+                    <h3>Все още няма поръчки.</h3>
                 )}
             </div>
             <div className={styles['add-product-form']}>
-                <h2>Add New Product</h2>
+                <h2>Добави нов продукт</h2>
                 <form>
                     <div>
-                        <label htmlFor="product-name">Product Name:</label>
+                        <label htmlFor="product-name">Име:</label>
                         <input
                             type="text"
                             id="product-name"
@@ -239,7 +240,7 @@ export const AdminPage = () => {
                     </div>
                     <div>
                         <label htmlFor="product-image">
-                            Product Image URL:
+                            Снимка на продукта(link):
                         </label>
                         <input
                             type="text"
@@ -250,7 +251,7 @@ export const AdminPage = () => {
                         />
                     </div>
                     <div>
-                        <label htmlFor="product-price">Product Price:</label>
+                        <label htmlFor="product-price">Цена:</label>
                         <input
                             type="text"
                             id="product-price"
@@ -261,7 +262,7 @@ export const AdminPage = () => {
                     </div>
                     <div>
                         <label htmlFor="product-description">
-                            Product Description:
+                            Описание:
                         </label>
                         <textarea
                             id="product-description"
@@ -271,7 +272,7 @@ export const AdminPage = () => {
                         ></textarea>
                     </div>
                     <button type="submit" onClick={onFormSubmitHandler}>
-                        Add Product
+                        Добави
                     </button>
                 </form>
             </div>

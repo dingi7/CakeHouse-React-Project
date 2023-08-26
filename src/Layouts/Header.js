@@ -36,7 +36,7 @@ export const Header = () => {
                                                 }
                                                 to="/"
                                             >
-                                                Home
+                                                Начало
                                             </NavLink>
                                         </li>
                                         <li className="menu-item">
@@ -49,7 +49,7 @@ export const Header = () => {
                                                 }
                                                 to="/about"
                                             >
-                                                About
+                                                За Нас
                                             </NavLink>
                                         </li>
                                         <li className="menu-item">
@@ -62,7 +62,7 @@ export const Header = () => {
                                                 }
                                                 to="/shop"
                                             >
-                                                Shop
+                                                Магазин
                                             </NavLink>
                                         </li>
                                         <li className="menu-item">
@@ -75,7 +75,7 @@ export const Header = () => {
                                                 }
                                                 to="/contact"
                                             >
-                                                Contact
+                                                Връзки
                                             </NavLink>
                                         </li>
                                         {isAuth ? (
@@ -92,7 +92,7 @@ export const Header = () => {
                                                         }
                                                         to="/profile"
                                                     >
-                                                        Profile
+                                                        Профил
                                                     </NavLink>
                                                 </li>
                                                 {isAdmin && (
@@ -124,7 +124,7 @@ export const Header = () => {
                                                         }
                                                         to="/logout"
                                                     >
-                                                        Logout
+                                                        Изход
                                                     </NavLink>
                                                 </li>
                                             </>
@@ -142,7 +142,7 @@ export const Header = () => {
                                                         }
                                                         to="/login"
                                                     >
-                                                        LogIn
+                                                        Вход
                                                     </NavLink>
                                                 </li>
                                                 <li className="menu-item">
@@ -157,7 +157,7 @@ export const Header = () => {
                                                         }
                                                         to="/register"
                                                     >
-                                                        Register
+                                                        Регистрация
                                                     </NavLink>
                                                 </li>
                                             </>

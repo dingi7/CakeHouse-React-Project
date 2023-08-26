@@ -55,9 +55,9 @@ export const ContactPage = () => {
                     <strong>Адрес:</strong> Сава Доброплодни 11
                 </p>
 
-                <h2>Или ни изпратете съобщение</h2>
+                {/* <h2>Или ни изпратете съобщение</h2> */}
             </div>
-            <form className={styles.form}>
+            {/* <form className={styles.form}>
                 <label htmlFor="name">Име:</label>
                 <input
                     name="name"
@@ -87,7 +87,7 @@ export const ContactPage = () => {
                 <button type="submit" onClick={onFormSubmitHandler}>
                     {loading ? <Spinner /> : 'Изпрати'}
                 </button>
-            </form>
+            </form> */}
             {/* <h1>Намерете ни</h1>
             <div id="map" className={styles.map}>
                 <GoogleMaps></GoogleMaps>

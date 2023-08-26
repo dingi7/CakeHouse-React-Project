@@ -6,17 +6,17 @@ export const ShoppingCartPage = () => {
     const { cart, totalPrice } = getCartFromLocalStorage();
     return (
         <div className="containerCart">
-            <h1>Shopping Cart</h1>
+            <h1>Количка</h1>
             {cart.length === 0 ? (
-                <p>Your cart is empty.</p>
+                <p>Все още няма нищо тук.</p>
             ) : (
                 <>
                     <table>
                         <thead>
                             <tr>
-                                <th>Image</th>
-                                <th>Name</th>
-                                <th>Price</th>
+                                <th>Снимка</th>
+                                <th>Име</th>
+                                <th>Цена</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -29,7 +29,7 @@ export const ShoppingCartPage = () => {
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td colSpan={2}>Subtotal:</td>
+                                <td colSpan={2}>Общо:</td>
                                 <td>{totalPrice.toFixed(2)}лв</td>
                             </tr>
                             <tr>

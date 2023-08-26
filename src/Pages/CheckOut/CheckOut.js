@@ -68,13 +68,13 @@ export const CheckOutPage = () => {
     if (totalPrice > 5 && !isOrderPlaced) {
         return (
             <>
-                <h1>Checkout</h1>
+                <h1>Поръчка</h1>
                 <table>
                     <thead>
                         <tr>
-                            <th>Product</th>
-                            <th>Name</th>
-                            <th>Price</th>
+                            <th>Продукт</th>
+                            <th>Име</th>
+                            <th>Цена</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -96,13 +96,13 @@ export const CheckOutPage = () => {
                 {!accessData && (
                     <div className={styles['checkout']}>
                         <p>
-                            <Link to="/login">Login</Link> or continue as guest
+                            <Link to="/login">Влезте в профила си</Link> или продължи като гост
                         </p>
                     </div>
                 )}
                 <div className={styles['checkout']}>
                     <div className={styles['checkout-box']}>
-                        <h2 className={styles.checkoutHeader}>Delivery</h2>
+                        <h2 className={styles.checkoutHeader}>Доставка</h2>
                         <br></br>
                         <input
                             type="radio"
@@ -112,8 +112,8 @@ export const CheckOutPage = () => {
                             checked={orderData.deliveryMethod === 'pickup'}
                             onChange={onFormChangeHandler}
                         />
-                        <label htmlFor="pickup">Pickup</label>
-                        <input
+                        <label htmlFor="pickup">Взимане на място</label>
+                        {/* <input
                             type="radio"
                             id="delivery"
                             name="deliveryMethod"
@@ -121,7 +121,7 @@ export const CheckOutPage = () => {
                             checked={orderData.deliveryMethod === 'delivery'}
                             onChange={onFormChangeHandler}
                         />
-                        <label htmlFor="delivery">Delivery</label>
+                        <label htmlFor="delivery">Delivery</label> */}
                         {orderData.deliveryMethod === 'delivery' && (
                             <>
                                 <label htmlFor="address">Address:</label>
@@ -138,7 +138,7 @@ export const CheckOutPage = () => {
                 </div>
                 <div className={styles['checkout']}>
                     <div className={styles['checkout-box']}>
-                        <h2 className={styles.checkoutHeader}>Payment</h2>
+                        <h2 className={styles.checkoutHeader}>Плащане</h2>
                         <input
                             type="radio"
                             id="cash"
@@ -147,8 +147,8 @@ export const CheckOutPage = () => {
                             checked={orderData.paymentMethod === 'cash'}
                             onChange={onFormChangeHandler}
                         />
-                        <label htmlFor="cash">Cash</label>
-                        <input
+                        <label htmlFor="cash">Наложен платеж</label>
+                        {/* <input
                             type="radio"
                             id="card"
                             name="paymentMethod"
@@ -156,7 +156,7 @@ export const CheckOutPage = () => {
                             checked={orderData.paymentMethod === 'card'}
                             onChange={onFormChangeHandler}
                         />
-                        <label htmlFor="card">Card</label>
+                        <label htmlFor="card">Card</label> */}
                     </div>
                 </div>
                 {accessData ? (
@@ -165,10 +165,10 @@ export const CheckOutPage = () => {
                     <div className={styles['checkout']}>
                         <div className={styles['checkout-box']}>
                             <h2 className={styles.checkoutHeader}>
-                                Personal information
+                                Лична информация
                             </h2>
                             <br></br>
-                            <label htmlFor="firstName">First Name:</label>
+                            <label htmlFor="firstName">Име:</label>
                             <input
                                 type="text"
                                 id="firstName"
@@ -176,7 +176,7 @@ export const CheckOutPage = () => {
                                 value={orderData.firstName}
                                 onChange={onFormChangeHandler}
                             />
-                            <label htmlFor="lastName">Last Name:</label>
+                            <label htmlFor="lastName">Фамилия:</label>
                             <input
                                 type="text"
                                 id="lastName"
@@ -184,7 +184,7 @@ export const CheckOutPage = () => {
                                 value={orderData.lastName}
                                 onChange={onFormChangeHandler}
                             />
-                            <label htmlFor="phoneNumber">Phone number:</label>
+                            <label htmlFor="phoneNumber">Тел. номер:</label>
                             <input
                                 type="text"
                                 id="phoneNumber"
@@ -201,7 +201,7 @@ export const CheckOutPage = () => {
                         className={styles.placeOrderButton}
                         onClick={onCheckOut}
                     >
-                        {loading ? <Spinner /> : 'Place Order'}
+                        {loading ? <Spinner /> : 'Поръчай'}
                     </button>
                 </div>
             </>
@@ -211,11 +211,11 @@ export const CheckOutPage = () => {
     } else {
         return (
             <>
-                <h1>Checkout</h1>
+                <h1>Поръчка</h1>
                 <div className={styles['checkout']}>
                     <p>
-                        Your cart is empty, continue{' '}
-                        <Link to="/shop">shopping</Link>
+                        Вашата количка е празна, продължете{' '}
+                        <Link to="/shop">пазаруването</Link>
                     </p>
                 </div>
             </>

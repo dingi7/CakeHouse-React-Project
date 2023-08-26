@@ -35,7 +35,7 @@ export const LoginPage = () => {
     return (
         <>
             <div className="containerLogin">
-                <h1>Login</h1>
+                <h1>Вход</h1>
                 <form>
                     <label htmlFor="email">Email</label>
                     <input
@@ -44,14 +44,16 @@ export const LoginPage = () => {
                         name="email"
                         value={userData.email}
                         onChange={onFormChangeHandler}
+                        placeholder='Напр: ivan@abv.bg'
                     />
-                    <label htmlFor="password">Password</label>
+                    <label htmlFor="password">Парола</label>
                     <input
                         type="password"
                         id="password"
                         name="password"
                         value={userData.password}
                         onChange={onFormChangeHandler}
+                        placeholder='*****'
                     />
                     <button
                         data-testid="login-btn"
@@ -63,7 +65,7 @@ export const LoginPage = () => {
                     </button>
                 </form>
                 <p>
-                    Don't have an account? <Link to="/register">Register</Link>
+                    Нямате профил? <Link to="/register">Регистрирайте се</Link>
                 </p>
             </div>
         </>

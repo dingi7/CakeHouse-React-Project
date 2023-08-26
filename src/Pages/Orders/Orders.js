@@ -28,17 +28,17 @@ export const Orders = () => {
     return (
         <div style={{ textAlign: 'center' }}>
             <div className={styles['order-list']}>
-                <h2>Orders</h2>
+                <h2>Поръчки</h2>
                 {loading ? (
                     <Spinner />
                 ) : (
                     <table>
                         <thead>
                             <tr>
-                                <th>Total</th>
-                                <th>Ordered Products</th>
-                                <th>Delivery</th>
-                                <th>Status</th>
+                                <th>Общо</th>
+                                <th>Поръчани продукти</th>
+                                <th>Доставка</th>
+                                <th>Статус</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -48,7 +48,7 @@ export const Orders = () => {
                         </tbody>
                     </table>
                 )}
-                <button onClick={() => navigate(-1)}>Go back</button>
+                <button onClick={() => navigate(-1)}>Върни се</button>
             </div>
         </div>
     );

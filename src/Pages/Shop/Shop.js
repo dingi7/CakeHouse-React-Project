@@ -20,7 +20,7 @@ export const ShopPage = () => {
 
     return (
         <>
-            <h1 className="page-title">Shop</h1>
+            <h1 className="page-title">Магазин</h1>
             <section className="padding-large">
                 <div className="container">
                     <div className="row">

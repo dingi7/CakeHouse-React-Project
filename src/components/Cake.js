@@ -26,7 +26,7 @@ export const Cake = ({ name, price, img, _id }) => {
                     className="add-to-cart"
                     data-product-tile="add-to-cart"
                 >
-                    Add to Cart
+                    Добави в количка
                 </button>
             </Link>
             <figcaption>

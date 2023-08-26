@@ -18,9 +18,9 @@ export const User = ({
                     {isButtonLoading ? (
                         <Spinner></Spinner>
                     ) : autorization === 'User' ? (
-                        'Make admin'
+                        'Направи admin'
                     ) : (
-                        'Make user'
+                        'Направи потребител'
                     )}
                 </button>
             </td>

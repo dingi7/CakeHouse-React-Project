@@ -9,7 +9,7 @@ export const SingleOrder = ({
 }) => {
     return (
         <tr>
-            <td>{total}lv</td>
+            <td>{total}лв</td>
             <td>
                 {products.map((p) => (
                     <Link key={p._id} to={`/shop/${p._id}`}>
@@ -18,7 +18,7 @@ export const SingleOrder = ({
                 ))}
             </td>
             <td>{location}</td>
-            <td>{fulfilled ? "Delivered" : "Pending"}</td>
+            <td>{fulfilled ? "Доставен" : "Чакащ"}</td>
         </tr>
     );
 };

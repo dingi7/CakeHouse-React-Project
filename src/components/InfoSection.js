@@ -11,10 +11,11 @@ export const InfoSection = () => {
                                 <div className="banner-content">
                                     <h2 className="banner-title">Cake House</h2>
                                     <p>
-                                        Cake house is a family owned bakery
-                                        based in Sliven, Bulgaria. It offers
-                                        various cakes and sweets, avaliable in
-                                        house and for delivery.
+                                        Cake House е сладкарница с уютна
+                                        обстановка и вкусна храна. Предлагаме
+                                        пресни сладки изкушения, които можете
+                                        да консумирате на място или да вземете
+                                        за вкъщи!
                                     </p>
                                     <div className="btn-wrap">
                                         <Link

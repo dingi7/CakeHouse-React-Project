@@ -38,7 +38,7 @@ export const MobileHeader = () => {
                                                 <span />
                                                 <span />
                                             </span>{' '}
-                                            Menu
+                                            Меню
                                         </a>
                                         <ul
                                             className="menu-list"
@@ -58,7 +58,7 @@ export const MobileHeader = () => {
                                                     }
                                                     to="/"
                                                 >
-                                                    Home
+                                                    Начало
                                                 </NavLink>
                                             </li>
                                             <li className="menu-item">
@@ -71,7 +71,7 @@ export const MobileHeader = () => {
                                                     }
                                                     to="/about"
                                                 >
-                                                    About
+                                                    За Нас
                                                 </NavLink>
                                             </li>
                                             <li className="menu-item">
@@ -84,7 +84,7 @@ export const MobileHeader = () => {
                                                     }
                                                     to="/shop"
                                                 >
-                                                    Shop
+                                                    Магазин
                                                 </NavLink>
                                             </li>
                                             <li className="menu-item">
@@ -97,7 +97,7 @@ export const MobileHeader = () => {
                                                     }
                                                     to="/contact"
                                                 >
-                                                    Contact
+                                                    Връзки
                                                 </NavLink>
                                             </li>
                                             <li className="menu-item">
@@ -109,7 +109,7 @@ export const MobileHeader = () => {
                                                             : 'menu-item nav-link'
                                                     }
                                                     to="/cart"
-                                                >Cart 
+                                                >Количка 
                                                 </NavLink>
                                             </li>
                                             {isAuth ? (
@@ -126,7 +126,7 @@ export const MobileHeader = () => {
                                                             }
                                                             to="/profile"
                                                         >
-                                                            Profile
+                                                            Профил
                                                         </NavLink>
                                                     </li>
                                                     {isAdmin && (
@@ -158,7 +158,7 @@ export const MobileHeader = () => {
                                                             }
                                                             to="/logout"
                                                         >
-                                                            Logout
+                                                            Изход
                                                         </NavLink>
                                                     </li>
                                                 </>
@@ -176,7 +176,7 @@ export const MobileHeader = () => {
                                                             }
                                                             to="/login"
                                                         >
-                                                            LogIn
+                                                            Вход
                                                         </NavLink>
                                                     </li>
                                                     <li className="menu-item">
@@ -191,7 +191,7 @@ export const MobileHeader = () => {
                                                             }
                                                             to="/register"
                                                         >
-                                                            Register
+                                                            Регистрация
                                                         </NavLink>
                                                     </li>
                                                 </>

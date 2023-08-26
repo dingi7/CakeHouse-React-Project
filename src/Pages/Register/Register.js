@@ -45,7 +45,7 @@ export const RegisterPage = () => {
     return (
         <>
             <div className="containerLogin">
-                <h1>Register</h1>
+                <h1>Регистрация</h1>
                 <form>
                     <label htmlFor="email">Email</label>
                     <input
@@ -54,49 +54,54 @@ export const RegisterPage = () => {
                         name="email"
                         value={userData.email}
                         onChange={onFormChangeHandler}
+                        placeholder='Напр: ivan@abv.bg'
                     />
-                    <label htmlFor="password">Full Name</label>
+                    <label htmlFor="password">Име</label>
                     <input
                         type="text"
                         id="name"
                         name="name"
                         value={userData.name}
                         onChange={onFormChangeHandler}
+                        placeholder='Напр: Иван Иванов'
                     />
-                    <label htmlFor="password">Phone Number</label>
+                    <label htmlFor="password">Телефонен номер</label>
                     <input
                         type="text"
                         id="phoneNumber"
                         name="phoneNumber"
                         value={userData.phoneNumber}
                         onChange={onFormChangeHandler}
+                        placeholder='Напр: +359 123456789'
                     />
-                    <label htmlFor="password">Password</label>
+                    <label htmlFor="password">Парола</label>
                     <input
                         type="password"
                         id="password"
                         name="password"
                         value={userData.password}
                         onChange={onFormChangeHandler}
+                        placeholder='*****'
                     />
-                    <label htmlFor="rePassword">Repeat Password</label>
+                    <label htmlFor="rePassword">Повторна Парола</label>
                     <input
                         type="password"
                         id="rePassword"
                         name="rePassword"
                         value={userData.rePassword}
                         onChange={onFormChangeHandler}
+                        placeholder='*****'
                     />
                     <button
                         type="submit"
                         className="btn"
                         onClick={onFormSubmit}
                     >
-                        {loading ? <Spinner /> : 'Register'}
+                        {loading ? <Spinner /> : 'Регистрация'}
                     </button>
                 </form>
                 <p>
-                    Already have an account? <Link to="/login">Login</Link>
+                    Вече имате профил? <Link to="/login">Вход</Link>
                 </p>
             </div>
         </>

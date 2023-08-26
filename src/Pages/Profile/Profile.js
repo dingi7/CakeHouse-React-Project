@@ -78,11 +78,11 @@ export const ProfilePage = () => {
     };
     return (
         <>
-            <h1>Profile</h1>
+            <h1>Профил</h1>
             <div className={styles.profileBox}>
-                <h2>Personal Information</h2>
+                <h2>Лична информация</h2>
                 <div className={styles.inputField}>
-                    <label htmlFor="name">Name:</label>
+                    <label htmlFor="name">Име:</label>
                     <input
                         type="text"
                         id="name"
@@ -93,7 +93,7 @@ export const ProfilePage = () => {
                     />
                 </div>
                 <div className={styles.inputField}>
-                    <label htmlFor="phone">Phone:</label>
+                    <label htmlFor="phone">Тел. номер:</label>
                     <input
                         type="tel"
                         id="phone"
@@ -116,7 +116,7 @@ export const ProfilePage = () => {
                 </div>
                 {!readOnly && (
                     <div className={styles.inputField}>
-                        <label htmlFor="password">Password:</label>
+                        <label htmlFor="password">Парола:</label>
                         <input
                             type="password"
                             id="password"
@@ -127,7 +127,7 @@ export const ProfilePage = () => {
                         />
                     </div>
                 )}
-                <div className={styles.inputField}>
+                {/* <div className={styles.inputField}>
                     <label htmlFor="accessRights">Access Rights:</label>
                     <input
                         type="text"
@@ -135,7 +135,7 @@ export const ProfilePage = () => {
                         defaultValue={accessData.autorization}
                         readOnly
                     />
-                </div>
+                </div> */}
                 <div className={styles['button-wrapper']}>
                     <button
                         className={styles['button']}
@@ -144,16 +144,16 @@ export const ProfilePage = () => {
                         {loading ? (
                             <Spinner></Spinner>
                         ) : readOnly ? (
-                            'Edit Profile'
+                            'Редактирай'
                         ) : (
-                            'Save Changes'
+                            'Запази промените'
                         )}
                     </button>
                     <button
                         className={styles['button']}
                         onClick={handleViewOrdersButtonClick}
                     >
-                        View orders
+                        Поръчки
                     </button>
                 </div>
             </div>

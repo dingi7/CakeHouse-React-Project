@@ -31,11 +31,11 @@ export const Order = ({
                 ))}
             </td>
             <td>{location}</td>
-            <td>Pending</td>
+            <td>Чакаща</td>
             <td>
                 <button onClick={() => onOrderFulfill(_id)}>
                     {' '}
-                    {isButtonLoading ? <Spinner></Spinner> : 'Fulfill'}
+                    {isButtonLoading ? <Spinner></Spinner> : 'Маркирай като изпълнена'}
                 </button>
             </td>
         </tr>
