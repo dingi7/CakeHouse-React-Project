@@ -1,11 +1,11 @@
 import { Link, NavLink } from 'react-router-dom';
-import { useContext } from 'react';
-import { AuthContext } from '../contexts/AuthContext';
+// import { useContext } from 'react';
+// import { AuthContext } from '../contexts/AuthContext';
 import './Header.css';
 // import { AuthContext } from '../../contexts/AuthContext';
 
 export const Header = () => {
-    const { isAuth, isAdmin } = useContext(AuthContext);
+    // const { isAuth, isAdmin } = useContext(AuthContext);
 
     return (
         <div id="header-wrap">
@@ -62,7 +62,7 @@ export const Header = () => {
                                                 }
                                                 to="/shop"
                                             >
-                                                Магазин
+                                                Асортимент
                                             </NavLink>
                                         </li>
                                         <li className="menu-item">
@@ -78,7 +78,7 @@ export const Header = () => {
                                                 Връзки
                                             </NavLink>
                                         </li>
-                                        {isAuth ? (
+                                        {/* {isAuth ? (
                                             <>
                                                 <li className="menu-item">
                                                     <NavLink
@@ -161,16 +161,16 @@ export const Header = () => {
                                                     </NavLink>
                                                 </li>
                                             </>
-                                        )}
+                                        )} */}
 
-                                        <li className="menu-item">
+                                        {/* <li className="menu-item">
                                             <NavLink to="/cart">
                                                 <i
                                                     className="fa fa-shopping-cart fa-lg"
                                                     aria-hidden="true"
                                                 ></i>
                                             </NavLink>
-                                        </li>
+                                        </li> */}
                                     </ul>
                                 </div>
                                 

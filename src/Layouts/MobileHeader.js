@@ -1,9 +1,9 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { AuthContext } from '../contexts/AuthContext';
+// import { AuthContext } from '../contexts/AuthContext';
 
 export const MobileHeader = () => {
-    const { isAuth, isAdmin } = useContext(AuthContext);
+    // const { isAuth, isAdmin } = useContext(AuthContext);
     const [isMenuActive, setIsMenuActive] = useState(false);
     const onMenuClick = (e) => {
         e.preventDefault();
@@ -48,7 +48,7 @@ export const MobileHeader = () => {
                                                     : 'none',
                                             }}
                                         >
-                                            <li className="menu-item ">
+                                            <li className="menu-item " onClick={onMenuClick}>
                                                 <NavLink
                                                     data-effect="Home"
                                                     className={({ isActive }) =>
@@ -61,7 +61,7 @@ export const MobileHeader = () => {
                                                     Начало
                                                 </NavLink>
                                             </li>
-                                            <li className="menu-item">
+                                            <li className="menu-item" onClick={onMenuClick}>
                                                 <NavLink
                                                     data-effect="About"
                                                     className={({ isActive }) =>
@@ -74,7 +74,7 @@ export const MobileHeader = () => {
                                                     За Нас
                                                 </NavLink>
                                             </li>
-                                            <li className="menu-item">
+                                            <li className="menu-item" onClick={onMenuClick}>
                                                 <NavLink
                                                     data-effect="Shop"
                                                     className={({ isActive }) =>
@@ -84,10 +84,10 @@ export const MobileHeader = () => {
                                                     }
                                                     to="/shop"
                                                 >
-                                                    Магазин
+                                                    Асортимент
                                                 </NavLink>
                                             </li>
-                                            <li className="menu-item">
+                                            <li className="menu-item" onClick={onMenuClick}>
                                                 <NavLink
                                                     data-effect="Contact"
                                                     className={({ isActive }) =>
@@ -100,7 +100,7 @@ export const MobileHeader = () => {
                                                     Връзки
                                                 </NavLink>
                                             </li>
-                                            <li className="menu-item">
+                                            {/* <li className="menu-item">
                                                 <NavLink
                                                     data-effect="Cart"
                                                     className={({ isActive }) =>
@@ -111,8 +111,8 @@ export const MobileHeader = () => {
                                                     to="/cart"
                                                 >Количка 
                                                 </NavLink>
-                                            </li>
-                                            {isAuth ? (
+                                            </li> */}
+                                            {/* {isAuth ? (
                                                 <>
                                                     <li className="menu-item">
                                                         <NavLink
@@ -195,7 +195,7 @@ export const MobileHeader = () => {
                                                         </NavLink>
                                                     </li>
                                                 </>
-                                            )}
+                                            )} */}
                                         </ul>
                                         <div className="hamburger">
                                             <span className="bar" />

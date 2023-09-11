@@ -9,7 +9,7 @@ import {
     fulfillOrderPost,
     getAllOrdersReq,
     getAllUsersReq,
-    getOrderStatistics,
+    // getOrderStatistics,
 } from '../../utils/request';
 import {
     errorNotification,
@@ -23,7 +23,7 @@ export const AdminPage = () => {
     const [isButtonLoading, setIsButtonLoading] = useState(false)
     const [orders, setOrders] = useState([]);
     const [users, setUsers] = useState([]);
-    const [statistics, setStatistics] = useState({});
+    // const [statistics, setStatistics] = useState({});
     const [productData, setProductData] = useState({
         name: '',
         description: '',
@@ -106,8 +106,8 @@ export const AdminPage = () => {
                 const users = await getAllUsersReq(accessData.accessToken);
                 setUsers(users);
 
-                const stats = await getOrderStatistics(accessData.accessToken);
-                setStatistics(stats);
+                // const stats = await getOrderStatistics(accessData.accessToken);
+                // setStatistics(stats);
                 
             } catch (err) {
                 errorNotification(err.message);
@@ -154,7 +154,7 @@ export const AdminPage = () => {
                 >
                     Поръчки
                 </h2>
-                {statistics.totalSales ? (
+                {/* {statistics.totalSales ? (
                     <div style={{ textAlign: 'center' }}>
                         <p
                             style={{
@@ -187,7 +187,7 @@ export const AdminPage = () => {
                     </div>
                 ) : (
                     <Spinner></Spinner>
-                )}
+                )} */}
 
                 {orders.length > 0 ? (
                     <table>
